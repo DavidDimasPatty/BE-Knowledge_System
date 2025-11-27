@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"log"
 
-	"example/be-knowledge/configs"
-	httpServer "example/be-knowledge/internal/delivery/http/router"
+	"be-knowledge/configs"
+	httpServer "be-knowledge/internal/delivery/http/router"
 )
 
 func main() {

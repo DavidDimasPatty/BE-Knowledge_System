@@ -1,8 +1,9 @@
 package router
 
 import (
+	"be-knowledge/internal/delivery/http/handler"
+
 	"github.com/gin-gonic/gin"
-	"example/be-knowledge/internal/delivery/http/handler"
 )
 
 func NewRouter() *gin.Engine {
