@@ -5,17 +5,18 @@ import "time"
 type User struct {
 	ID              int        `db:"id"`
 	Username        string     `db:"username"`
-	Password        string     `db:"password"`
-	Email           string     `db:"email"`
-	NoTelp          string     `db:"noTelp"`
-	Nama            string     `db:"nama"`
+	Password        string     `db:"PASSWORD"`
+	Email           *string    `db:"email"`
+	NoTelp          *string    `db:"noTelp"`
+	Nama            *string    `db:"nama"`
 	Roles           int        `db:"roles"`
-	Status          string     `db:"status"`
+	Status          *string    `db:"STATUS"`
 	LastLogin       *time.Time `db:"lastLogin"`
-	OldPassword     string     `db:"oldPassword"`
+	OldPassword     *string    `db:"oldPassword"`
 	PasswordExpired *time.Time `db:"passwordExpired"`
-	AddTime         *time.Time `db:"addTime"`
+	AddTime         *time.Time `db:"ADDTIME"`
 	UpdTime         *time.Time `db:"updTime"`
-	AddId           string     `db:"addId"`
-	UpdId           string     `db:"updId"`
+	AddId           *string    `db:"addId"`
+	UpdId           *string    `db:"updId"`
+	Divisi          int        `db:"divisi"`
 }

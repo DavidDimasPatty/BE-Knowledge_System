@@ -74,7 +74,7 @@ func (h *UserManagementHandler) AddUser(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Success",
-		"data":    "null",
+		"data":    nil,
 	})
 }
 
@@ -94,7 +94,7 @@ func (h *UserManagementHandler) EditUser(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Success",
-		"data":    "null",
+		"data":    nil,
 	})
 }
 
@@ -114,6 +114,6 @@ func (h *UserManagementHandler) DeleteUser(c *gin.Context) {
 
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Success",
-		"data":    "null",
+		"data":    nil,
 	})
 }
