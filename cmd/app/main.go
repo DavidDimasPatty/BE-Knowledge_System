@@ -15,10 +15,10 @@ import (
 )
 
 func main() {
-	// 1. load config
+	//  load config
 	cfg := configs.LoadConfig()
 
-	// 2. connect database
+	// connect database
 	dsn := fmt.Sprintf("%s:%s@tcp(%s)/%s?parseTime=true",
 		cfg.DBUser,
 		cfg.DBPass,
@@ -31,19 +31,19 @@ func main() {
 		log.Fatal("Cannot connect DB:", err)
 	}
 
-	// 3. repository
+	//Auth Handler
 	userRepo := repository.NewUserRepository(db)
-
-	// 4. service
 	userService := usecases.NewUserService(userRepo)
-
-	// 5. handler
 	authHandler := handler.NewAuthHandler(userService)
+	//User Management Handler
+	userManagementRepo := repository.NewUserManagementRepository(db)
+	userManagementService := usecases.NewUserManagementService(userManagementRepo)
+	userManagementHandler := handler.NewUserManagementHandler(userManagementService)
 
-	// 6. router
-	r := router.SetupRouter(authHandler)
+	// router
+	r := router.SetupRouter(authHandler, userManagementHandler)
 
-	// 7. run server
+	// run server
 	port := fmt.Sprintf(":%s", cfg.AppPort)
 	log.Printf("Server running on port %s (env: %s)", cfg.AppPort, cfg.AppEnv)
 

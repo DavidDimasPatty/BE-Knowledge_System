@@ -4,6 +4,7 @@ import (
 	dto "be-knowledge/internal/delivery/dto/userManagement"
 	"be-knowledge/internal/usecases"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -12,7 +13,7 @@ type UserManagementHandler struct {
 	userManagementService usecases.UserManagementService
 }
 
-func UserManagementHandlerHandler(userManagementService usecases.UserManagementService) *UserManagementHandler {
+func NewUserManagementHandler(userManagementService usecases.UserManagementService) *UserManagementHandler {
 	return &UserManagementHandler{userManagementService}
 }
 
@@ -33,24 +34,27 @@ func (h *UserManagementHandler) GetAllUser(c *gin.Context) {
 }
 
 func (h *UserManagementHandler) EditUserGet(c *gin.Context) {
-	var req dto.UserManagement_GetEditUser_Request
-
-	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request"})
+	idStr := c.Query("id")
+	if idStr == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "id is required"})
 		return
 	}
 
-	user, err := h.userManagementService.EditUserGet(req.Id)
+	id, err := strconv.Atoi(idStr)
 	if err != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "id must be a number"})
+		return
+	}
+
+	user, err := h.userManagementService.EditUserGet(id)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Success",
-		"user": gin.H{
-			"data": user,
-		},
+		"data":    user,
 	})
 }
 

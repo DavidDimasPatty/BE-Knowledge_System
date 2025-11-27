@@ -6,15 +6,20 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRouter(authHandler *handler.AuthHandler) *gin.Engine {
+func SetupRouter(authHandler *handler.AuthHandler, userManagementHandler *handler.UserManagementHandler) *gin.Engine {
 	r := gin.Default()
 
 	registerPingRoutes(r)
 	registerAuthRoutes(r, authHandler)
-
+	registerGetAllUserRoutes(r, userManagementHandler)
+	registerEditUserGet(r, userManagementHandler)
+	registerAddUserRoutes(r, userManagementHandler)
+	registerEditUserRoutes(r, userManagementHandler)
+	registerDeleteUserRoutes(r, userManagementHandler)
 	return r
 }
 
+// Auth Router
 func registerPingRoutes(r *gin.Engine) {
 	r.GET("/ping", handler.Ping)
 }
@@ -23,6 +28,21 @@ func registerAuthRoutes(r *gin.Engine, authHandler *handler.AuthHandler) {
 	r.POST("/login", authHandler.Login)
 }
 
-// func getAllUserRoutes(r *gin.Engine, authHandler *handler.AuthHandler) {
-// 	r.POST("/login", authHandler.Login)
-// }
+// UserManagement Router
+func registerGetAllUserRoutes(r *gin.Engine, userManagementHandler *handler.UserManagementHandler) {
+	r.GET("/getAllUser", userManagementHandler.GetAllUser)
+}
+func registerEditUserGet(r *gin.Engine, userManagementHandler *handler.UserManagementHandler) {
+	r.GET("/editUserGet", userManagementHandler.EditUserGet)
+}
+func registerAddUserRoutes(r *gin.Engine, userManagementHandler *handler.UserManagementHandler) {
+	r.POST("/addUser", userManagementHandler.AddUser)
+}
+func registerEditUserRoutes(r *gin.Engine, userManagementHandler *handler.UserManagementHandler) {
+	r.POST("/editUser", userManagementHandler.EditUser)
+}
+func registerDeleteUserRoutes(r *gin.Engine, userManagementHandler *handler.UserManagementHandler) {
+	r.POST("/deleteUser", userManagementHandler.DeleteUser)
+}
+
+//Dokumen Router
