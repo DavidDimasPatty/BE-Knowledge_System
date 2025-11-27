@@ -6,10 +6,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func NewRouter() *gin.Engine {
+func SetupRouter(authHandler *handler.AuthHandler) *gin.Engine {
 	r := gin.Default()
 
-	r.GET("/ping", handler.Ping)
+	registerPingRoutes(r)
+	registerAuthRoutes(r, authHandler)
 
 	return r
+}
+
+func registerPingRoutes(r *gin.Engine) {
+	r.GET("/ping", handler.Ping)
+}
+
+func registerAuthRoutes(r *gin.Engine, authHandler *handler.AuthHandler) {
+	r.POST("/login", authHandler.Login)
 }

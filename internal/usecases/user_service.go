@@ -12,6 +12,7 @@ import (
 
 type UserService interface {
 	Login(username, password string) (*entities.User, error)
+	UpdateLastLogin(id int, t time.Time) error
 }
 
 type userService struct {
@@ -34,7 +35,18 @@ func (s *userService) Login(username, password string) (*entities.User, error) {
 	}
 
 	now := time.Now()
+
+	// Update last login di DB
+    err = s.UpdateLastLogin(user.ID, now)
+    if err != nil {
+        return nil, errors.New("gagal update last login")
+    }
+
 	user.LastLogin = &now
 
 	return user, nil
+}
+
+func (s *userService) UpdateLastLogin(id int, t time.Time) error {
+    return s.repo.UpdateLastLogin(id, t)
 }

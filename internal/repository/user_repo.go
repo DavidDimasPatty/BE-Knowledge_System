@@ -4,10 +4,13 @@ import (
 	"be-knowledge/internal/entities"
 
 	"github.com/jmoiron/sqlx"
+
+	"time"
 )
 
 type UserRepository interface {
 	GetByUsername(username string) (*entities.User, error)
+	UpdateLastLogin(id int, lastLogin time.Time) error
 }
 
 type userRepository struct {
@@ -28,4 +31,15 @@ func (r *userRepository) GetByUsername(username string) (*entities.User, error) 
 	}
 
 	return &user, nil
+}
+
+func (r *userRepository) UpdateLastLogin(id int, lastLogin time.Time) error {
+    query := "UPDATE users SET lastLogin = ? WHERE id = ?"
+
+    _, err := r.db.Exec(query, lastLogin, id)
+    if err != nil {
+        return err
+    }
+
+    return nil
 }
