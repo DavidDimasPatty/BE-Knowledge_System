@@ -22,3 +22,7 @@ func registerPingRoutes(r *gin.Engine) {
 func registerAuthRoutes(r *gin.Engine, authHandler *handler.AuthHandler) {
 	r.POST("/login", authHandler.Login)
 }
+
+// func getAllUserRoutes(r *gin.Engine, authHandler *handler.AuthHandler) {
+// 	r.POST("/login", authHandler.Login)
+// }
