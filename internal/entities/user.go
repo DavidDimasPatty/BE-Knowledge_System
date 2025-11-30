@@ -12,6 +12,8 @@ type User struct {
 	Roles           int        `db:"roles"`
 	Status          *string    `db:"STATUS"`
 	LastLogin       *time.Time `db:"lastLogin"`
+	LoginCount      int       `db:"loginCount"`
+	BlockDate       *time.Time `db:"blockDate"`
 	OldPassword     *string    `db:"oldPassword"`
 	PasswordExpired *time.Time `db:"passwordExpired"`
 	AddTime         *time.Time `db:"ADDTIME"`
@@ -19,4 +21,6 @@ type User struct {
 	AddId           *string    `db:"addId"`
 	UpdId           *string    `db:"updId"`
 	Divisi          int        `db:"divisi"`
+
+	RoleName *string `db:"role_name"`
 }

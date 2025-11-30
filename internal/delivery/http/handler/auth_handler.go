@@ -1,6 +1,7 @@
 package handler
 
 import (
+	dto "be-knowledge/internal/delivery/dto/auth"
 	"be-knowledge/internal/usecases"
 	"net/http"
 
@@ -15,13 +16,8 @@ func NewAuthHandler(userService usecases.UserService) *AuthHandler {
 	return &AuthHandler{userService}
 }
 
-type LoginRequest struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
-}
-
 func (h *AuthHandler) Login(c *gin.Context) {
-	var req LoginRequest
+	var req dto.Auth_Login_Request
 
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request"})
@@ -35,11 +31,12 @@ func (h *AuthHandler) Login(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"message": "login berhasil",
+		"message": "Success",
 		"user": gin.H{
 			"id":       user.ID,
 			"username": user.Username,
-			"roles":    user.Roles,
+			"roleId":   user.Roles,
+			"roleName": user.RoleName,
 		},
 	})
 }

@@ -11,6 +11,9 @@ import (
 type UserRepository interface {
 	GetByUsername(username string) (*entities.User, error)
 	UpdateLastLogin(id int, lastLogin time.Time) error
+	BlockUser(id int, blockDate time.Time) error
+	IncrementLoginCount(id int) error
+	ResetLoginCount(id int) error
 }
 
 type userRepository struct {
@@ -23,7 +26,11 @@ func NewUserRepository(db *sqlx.DB) UserRepository {
 
 func (r *userRepository) GetByUsername(username string) (*entities.User, error) {
 	user := entities.User{}
-	query := "SELECT * FROM users WHERE username = ? LIMIT 1"
+	query := `
+		SELECT u.*, r.nama AS role_name
+		FROM users u 
+		LEFT JOIN roles r ON u.roles = r.id
+		WHERE username = ? LIMIT 1`
 
 	err := r.db.Get(&user, query, username)
 	if err != nil {
@@ -34,12 +41,35 @@ func (r *userRepository) GetByUsername(username string) (*entities.User, error) 
 }
 
 func (r *userRepository) UpdateLastLogin(id int, lastLogin time.Time) error {
-    query := "UPDATE users SET lastLogin = ? WHERE id = ?"
+	query := "UPDATE users SET lastLogin = ? WHERE id = ?"
 
-    _, err := r.db.Exec(query, lastLogin, id)
-    if err != nil {
-        return err
-    }
+	_, err := r.db.Exec(query, lastLogin, id)
+	if err != nil {
+		return err
+	}
 
-    return nil
+	return nil
+}
+
+func (r *userRepository) BlockUser(id int, blockDate time.Time) error {
+	query := "UPDATE users SET status = 'BLOCK', blockDate = ? WHERE id = ?"
+
+	_, err := r.db.Exec(query, blockDate, id)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (r *userRepository) IncrementLoginCount(id int) error {
+    query := "UPDATE users SET loginCount = loginCount + 1 WHERE id = ?"
+    _, err := r.db.Exec(query, id)
+    return err
+}
+
+func (r *userRepository) ResetLoginCount(id int) error {
+    query := "UPDATE users SET loginCount = 0 WHERE id = ?"
+    _, err := r.db.Exec(query, id)
+    return err
 }
