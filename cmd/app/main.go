@@ -39,9 +39,13 @@ func main() {
 	userManagementRepo := repository.NewUserManagementRepository(db)
 	userManagementService := usecases.NewUserManagementService(userManagementRepo)
 	userManagementHandler := handler.NewUserManagementHandler(userManagementService)
+	//Dokumen Management Handler
+	dokumenManagementRepo := repository.NewDokumenManagementRepository(db)
+	dokumenManagementService := usecases.NewDokumenManagementService(dokumenManagementRepo)
+	dokumenManagementHandler := handler.NewDokumenManagementHandler(dokumenManagementService)
 
 	// router
-	r := router.SetupRouter(authHandler, userManagementHandler)
+	r := router.SetupRouter(authHandler, userManagementHandler, dokumenManagementHandler)
 
 	// run server
 	port := fmt.Sprintf(":%s", cfg.AppPort)

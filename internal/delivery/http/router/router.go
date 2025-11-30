@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRouter(authHandler *handler.AuthHandler, userManagementHandler *handler.UserManagementHandler) *gin.Engine {
+func SetupRouter(authHandler *handler.AuthHandler, userManagementHandler *handler.UserManagementHandler, dokumenManagementHandler *handler.DokumenManagementHandler) *gin.Engine {
 	r := gin.Default()
 
 	registerPingRoutes(r)
@@ -16,6 +16,12 @@ func SetupRouter(authHandler *handler.AuthHandler, userManagementHandler *handle
 	registerAddUserRoutes(r, userManagementHandler)
 	registerEditUserRoutes(r, userManagementHandler)
 	registerDeleteUserRoutes(r, userManagementHandler)
+	registerGetAllDokumenRoutes(r, dokumenManagementHandler)
+	registerEditDokumenGet(r, dokumenManagementHandler)
+	registerAddDokumenRoutes(r, dokumenManagementHandler)
+	registerEditDokumenRoutes(r, dokumenManagementHandler)
+	registerDeleteDokumenRoutes(r, dokumenManagementHandler)
+	registerDownloadDokumenRoutes(r, dokumenManagementHandler)
 	return r
 }
 
@@ -45,4 +51,22 @@ func registerDeleteUserRoutes(r *gin.Engine, userManagementHandler *handler.User
 	r.POST("/deleteUser", userManagementHandler.DeleteUser)
 }
 
-//Dokumen Router
+// Dokumen Router
+func registerGetAllDokumenRoutes(r *gin.Engine, dokumenManagementHandler *handler.DokumenManagementHandler) {
+	r.GET("/getAllDokumen", dokumenManagementHandler.GetAllDokumen)
+}
+func registerEditDokumenGet(r *gin.Engine, dokumenManagementHandler *handler.DokumenManagementHandler) {
+	r.GET("/editDokumenGet", dokumenManagementHandler.EditDokumenGet)
+}
+func registerAddDokumenRoutes(r *gin.Engine, dokumenManagementHandler *handler.DokumenManagementHandler) {
+	r.POST("/addDokumen", dokumenManagementHandler.AddDokumen)
+}
+func registerEditDokumenRoutes(r *gin.Engine, dokumenManagementHandler *handler.DokumenManagementHandler) {
+	r.POST("/editDokumen", dokumenManagementHandler.EditDokumen)
+}
+func registerDeleteDokumenRoutes(r *gin.Engine, dokumenManagementHandler *handler.DokumenManagementHandler) {
+	r.POST("/deleteDokumen", dokumenManagementHandler.DeleteDokumen)
+}
+func registerDownloadDokumenRoutes(r *gin.Engine, dokumenManagementHandler *handler.DokumenManagementHandler) {
+	r.POST("/downloadDokumen", dokumenManagementHandler.DownloadDokumen)
+}
