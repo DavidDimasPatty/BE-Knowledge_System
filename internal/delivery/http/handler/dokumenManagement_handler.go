@@ -135,8 +135,4 @@ func (h *DokumenManagementHandler) DownloadDokumen(c *gin.Context) {
 
 	c.Header("Content-Disposition", "attachment; filename="+filepath.Base(dok.Link))
 	c.Data(200, "application/octet-stream", fileBytes)
-	c.JSON(http.StatusOK, gin.H{
-		"message": "Success",
-		"data":    nil,
-	})
 }
