@@ -4,6 +4,7 @@ import (
 	dto "be-knowledge/internal/delivery/dto/dokumenManagement"
 	"be-knowledge/internal/usecases"
 	"net/http"
+	"path/filepath"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -126,12 +127,14 @@ func (h *DokumenManagementHandler) DownloadDokumen(c *gin.Context) {
 		return
 	}
 
-	err := h.dokumenManagementService.DeleteDokumen(req.Id)
+	dok, fileBytes, err := h.dokumenManagementService.DownloadDokumen(req.Id)
 	if err != nil {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 		return
 	}
 
+	c.Header("Content-Disposition", "attachment; filename="+filepath.Base(dok.Link))
+	c.Data(200, "application/octet-stream", fileBytes)
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Success",
 		"data":    nil,

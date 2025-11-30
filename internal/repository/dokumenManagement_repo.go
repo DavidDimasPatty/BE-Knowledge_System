@@ -3,6 +3,9 @@ package repository
 import (
 	dto "be-knowledge/internal/delivery/dto/dokumenManagement"
 	"be-knowledge/internal/entities"
+	"errors"
+	"os"
+	"path/filepath"
 
 	"github.com/jmoiron/sqlx"
 )
@@ -13,6 +16,7 @@ type DokumenManagementRepository interface {
 	EditDokumenGet(id int) (data *entities.Dokumen, er error)
 	EditDokumen(data *dto.DokumenManagement_EditDokumen_Request) error
 	DeleteDokumen(id int) error
+	DownloadDokumen(id int) (*entities.Dokumen, []byte, error)
 }
 
 type dokumenManagementRepository struct {
@@ -42,7 +46,13 @@ func (r *dokumenManagementRepository) GetAllDokumen() (*dto.DokumenManagement_Ge
 
 func (r *dokumenManagementRepository) AddDokumen(data *dto.DokumenManagement_AddDokumen_Request) error {
 
-	link := ""
+	parentPath := os.Getenv("STORAGE_PATH")
+
+	if parentPath == "" {
+		return errors.New("STORAGE_PATH is not set in .env")
+	}
+
+	link := filepath.Join(parentPath, data.FileName)
 
 	query := `
 		INSERT INTO dokumen
@@ -95,4 +105,25 @@ func (r *dokumenManagementRepository) DeleteDokumen(id int) error {
 
 	_, err := r.db.Exec(query, id)
 	return err
+}
+
+func (r *dokumenManagementRepository) DownloadDokumen(id int) (*entities.Dokumen, []byte, error) {
+	dok := entities.Dokumen{}
+	query := "SELECT * FROM dokumen WHERE id = ?"
+
+	err := r.db.Get(&dok, query, id)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	if dok.Link == "" {
+		return nil, nil, errors.New("file link is empty")
+	}
+
+	fileBytes, err := os.ReadFile(dok.Link)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	return &dok, fileBytes, nil
 }

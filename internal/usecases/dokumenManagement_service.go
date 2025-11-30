@@ -14,7 +14,7 @@ type DokumenManagementService interface {
 	EditDokumenGet(id int) (data *entities.Dokumen, er error)
 	EditDokumen(data *dto.DokumenManagement_EditDokumen_Request) error
 	DeleteDokumen(id int) error
-	DownloadDokumen(id int) error
+	DownloadDokumen(id int) (*entities.Dokumen, []byte, error)
 }
 
 type dokumenManagementService struct {
@@ -55,6 +55,6 @@ func (s *dokumenManagementService) DeleteDokumen(id int) error {
 	return s.repo.DeleteDokumen(id)
 }
 
-func (s *dokumenManagementService) DownloadDokumen(id int) error {
-	return s.repo.DeleteDokumen(id)
+func (s *dokumenManagementService) DownloadDokumen(id int) (*entities.Dokumen, []byte, error) {
+	return s.repo.DownloadDokumen(id)
 }
