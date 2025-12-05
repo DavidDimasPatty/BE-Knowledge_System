@@ -5,7 +5,7 @@ import "time"
 type Topic struct {
 	ID           *int       `db:"id"`
 	Topic        *string    `db:"topic"`
-	Desctription *string    `db:"description"`
+	Desctription *string    `db:"descriptions"`
 	IdCategories *int       `db:"idCategories"`
 	AddTime      *time.Time `db:"ADDTIME"`
 	UpdTime      *time.Time `db:"updTime"`

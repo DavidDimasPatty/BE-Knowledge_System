@@ -37,3 +37,8 @@ func AuthLog(message, endpoint string) {
 func UserManagementLog(message, endpoint string) {
 	write("tracelog_user_management", message, endpoint)
 }
+
+// Untuk Topic
+func TopicLog(message, endpoint string) {
+	write("tracelog_topic", message, endpoint)
+}

@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRouter(authHandler *handler.AuthHandler, userManagementHandler *handler.UserManagementHandler, dokumenManagementHandler *handler.DokumenManagementHandler) *gin.Engine {
+func SetupRouter(authHandler *handler.AuthHandler, userManagementHandler *handler.UserManagementHandler, dokumenManagementHandler *handler.DokumenManagementHandler, topicHandler *handler.TopicHandler) *gin.Engine {
 	r := gin.Default()
 
 	registerPingRoutes(r)
@@ -69,4 +69,9 @@ func registerDeleteDokumenRoutes(r *gin.Engine, dokumenManagementHandler *handle
 }
 func registerDownloadDokumenRoutes(r *gin.Engine, dokumenManagementHandler *handler.DokumenManagementHandler) {
 	r.POST("/downloadDokumen", dokumenManagementHandler.DownloadDokumen)
+}
+
+// Topic Router
+func registerTopicRoutes(r *gin.Engine, topicHandler *handler.TopicHandler) {
+	r.GET("/getTopicById", topicHandler.GetTopicById)
 }
