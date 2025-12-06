@@ -26,7 +26,7 @@ func (h *TopicHandler) GetTopicById(c *gin.Context) {
 	// Bind query param ke struct
 	if err := c.ShouldBindQuery(&req); err != nil {
 		Tracelog.TopicLog("Request tidak valid: "+err.Error(), namaEndpoint)
-		c.JSON(http.StatusBadRequest, gin.H{"error": "id is required & must be a number"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -45,15 +45,56 @@ func (h *TopicHandler) GetTopicById(c *gin.Context) {
 	})
 }
 
-// func (h *TopicHandler) GetAllTopic(c *gin.Context) {
-// 	topics, err := h.topicService.GetAllTopic()
-// 	if err != nil {
-// 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-// 		return
-// 	}
+func (h *TopicHandler) GetAllTopicUser(c *gin.Context) {
+	namaEndpoint := "GetAllTopicUser"
+	Tracelog.TopicLog("Mulai proses GetAllTopicUser", namaEndpoint)
 
-// 	c.JSON(http.StatusOK, gin.H{
-// 		"message": "Success",
-// 		"data":    topics,
-// 	})
-// }
+	var req dto.Topic_GetAllTopicUser_Request
+
+	// Bind query param ke struct
+	if err := c.ShouldBindQuery(&req); err != nil {
+		Tracelog.TopicLog("Request tidak valid: "+err.Error(), namaEndpoint)
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	topics, err := h.topicService.GetAllTopicUser(req.Username)
+	if err != nil {
+		Tracelog.TopicLog("GetAllTopicUser gagal: "+err.Error(), namaEndpoint)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	Tracelog.TopicLog("GetAllTopicUser berhasil", namaEndpoint)
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Success",
+		"data":    topics,
+	})
+}
+
+func (h *TopicHandler) GetAllTopicUserByidCategories(c *gin.Context) {
+	namaEndpoint := "GetAllTopicUserByidCategories"
+	Tracelog.TopicLog("Mulai proses GetAllTopicUserByidCategories", namaEndpoint)
+
+	var req dto.Topic_GetAllTopicUserByidCategories_Request
+
+	// Bind query param ke struct
+	if err := c.ShouldBindQuery(&req); err != nil {
+		Tracelog.TopicLog("Request tidak valid: "+err.Error(), namaEndpoint)
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	topics, err := h.topicService.GetAllTopicUserByidCategories(req.Username, req.IdCategories)
+	if err != nil {
+		Tracelog.TopicLog("GetAllTopicUserByidCategories gagal: "+err.Error(), namaEndpoint)
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	Tracelog.TopicLog("GetAllTopicUserByidCategories berhasil", namaEndpoint)
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Success",
+		"data":    topics,
+	})
+}

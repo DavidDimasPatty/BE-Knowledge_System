@@ -74,4 +74,6 @@ func registerDownloadDokumenRoutes(r *gin.Engine, dokumenManagementHandler *hand
 // Topic Router
 func registerTopicRoutes(r *gin.Engine, topicHandler *handler.TopicHandler) {
 	r.GET("/getTopicById", topicHandler.GetTopicById)
+	r.GET("/getAllTopicUser", topicHandler.GetAllTopicUser)
+	r.GET("/getAllTopicUserByidCategories", topicHandler.GetAllTopicUserByidCategories)
 }
