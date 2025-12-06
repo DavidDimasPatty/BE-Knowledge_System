@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRouter(authHandler *handler.AuthHandler, userManagementHandler *handler.UserManagementHandler, dokumenManagementHandler *handler.DokumenManagementHandler, topicHandler *handler.TopicHandler) *gin.Engine {
+func SetupRouter(authHandler *handler.AuthHandler, userManagementHandler *handler.UserManagementHandler, dokumenManagementHandler *handler.DokumenManagementHandler, topicHandler *handler.TopicHandler, websocketHandler *handler.WebSocketHandler) *gin.Engine {
 	r := gin.Default()
 
 	registerPingRoutes(r)
@@ -22,6 +22,8 @@ func SetupRouter(authHandler *handler.AuthHandler, userManagementHandler *handle
 	registerEditDokumenRoutes(r, dokumenManagementHandler)
 	registerDeleteDokumenRoutes(r, dokumenManagementHandler)
 	registerDownloadDokumenRoutes(r, dokumenManagementHandler)
+	registerTopicRoutes(r, topicHandler)
+	registerWSChat(r, websocketHandler)
 	return r
 }
 
@@ -74,4 +76,9 @@ func registerDownloadDokumenRoutes(r *gin.Engine, dokumenManagementHandler *hand
 // Topic Router
 func registerTopicRoutes(r *gin.Engine, topicHandler *handler.TopicHandler) {
 	r.GET("/getTopicById", topicHandler.GetTopicById)
+}
+
+// Web Socket
+func registerWSChat(r *gin.Engine, WebSocketHandler *handler.WebSocketHandler) {
+	r.GET("/ws", WebSocketHandler.Handle)
 }
