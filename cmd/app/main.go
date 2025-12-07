@@ -47,9 +47,12 @@ func main() {
 	topicRepo := repository.NewTopicRepository(db)
 	topicService := usecases.NewTopicService(topicRepo)
 	topicHandler := handler.NewTopicHandler(topicService)
+	// WebSocket Handler
+	wsManager := handler.NewWebSocketManager()
+	websocketHandler := handler.NewWebSocketHandler(wsManager)
 
 	// router
-	r := router.SetupRouter(authHandler, userManagementHandler, dokumenManagementHandler, topicHandler)
+	r := router.SetupRouter(authHandler, userManagementHandler, dokumenManagementHandler, topicHandler, websocketHandler)
 
 	// run server
 	port := fmt.Sprintf(":%s", cfg.AppPort)
