@@ -31,7 +31,7 @@ func (s *userService) Login(username, password string) (*entities.User, error) {
     }
 
     // Cek apakah user sudah diblock
-    if user.Status != nil && *user.Status == "BLOCK" {
+    if user.Status != nil && *user.Status == "Block" {
         return nil, errors.New("akun anda diblok, hubungi admin")
     }
 

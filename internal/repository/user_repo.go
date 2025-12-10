@@ -52,7 +52,7 @@ func (r *userRepository) UpdateLastLogin(id int, lastLogin time.Time) error {
 }
 
 func (r *userRepository) BlockUser(id int, blockDate time.Time) error {
-	query := "UPDATE users SET status = 'BLOCK', blockDate = ? WHERE id = ?"
+	query := "UPDATE users SET status = 'Block', blockDate = ? WHERE id = ?"
 
 	_, err := r.db.Exec(query, blockDate, id)
 	if err != nil {
