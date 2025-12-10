@@ -47,7 +47,7 @@ func (h *WebSocketHandler) Handle(c *gin.Context) {
 		}
 
 		prompt := url.QueryEscape(string(msg))
-		resp, err := http.Get("http://localhost:5000/stream?prompt=" + prompt)
+		resp, err := http.Get("http://localhost:9090/ask?question=" + prompt)
 		if err != nil {
 			h.manager.SendToUser(userId, "AI error")
 			continue
