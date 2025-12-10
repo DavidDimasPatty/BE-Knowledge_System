@@ -2,12 +2,15 @@ package router
 
 import (
 	"be-knowledge/internal/delivery/http/handler"
+	"be-knowledge/internal/delivery/http/middleware"
 
 	"github.com/gin-gonic/gin"
 )
 
 func SetupRouter(authHandler *handler.AuthHandler, userManagementHandler *handler.UserManagementHandler, dokumenManagementHandler *handler.DokumenManagementHandler, topicHandler *handler.TopicHandler, websocketHandler *handler.WebSocketHandler) *gin.Engine {
 	r := gin.Default()
+
+	r.Use(middleware.GeneralMiddleware())
 
 	registerPingRoutes(r)
 	registerAuthRoutes(r, authHandler)

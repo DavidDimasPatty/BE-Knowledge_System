@@ -1,12 +1,21 @@
 package middleware
 
-import "github.com/gin-gonic/gin"
+import (
+	"time"
 
-// Middleware kosong (placeholder)
-// Tidak melakukan apa-apa, hanya melanjutkan request
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
+)
+
 func GeneralMiddleware() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		// bisa tambahkan log atau apa pun di sini
-		c.Next()
-	}
+    return cors.New(cors.Config{
+        AllowOrigins: []string{
+            "http://localhost:3000",
+        },
+        AllowMethods: []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+        AllowHeaders: []string{"Origin", "Content-Type", "Authorization"},
+        ExposeHeaders: []string{"Content-Length"},
+        AllowCredentials: true,
+        MaxAge: 12 * time.Hour,
+    })
 }
