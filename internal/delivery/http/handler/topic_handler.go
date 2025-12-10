@@ -58,7 +58,7 @@ func (h *TopicHandler) GetAllTopicUser(c *gin.Context) {
 		return
 	}
 
-	topics, err := h.topicService.GetAllTopicUser(req.Username)
+	topics, err := h.topicService.GetAllTopicUser(req.Username, req.IsFavorite)
 	if err != nil {
 		Tracelog.TopicLog("GetAllTopicUser gagal: "+err.Error(), namaEndpoint)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
