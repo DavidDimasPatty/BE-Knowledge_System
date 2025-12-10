@@ -10,6 +10,7 @@ import (
 
 func SetupRouter(authHandler *handler.AuthHandler, userManagementHandler *handler.UserManagementHandler, dokumenManagementHandler *handler.DokumenManagementHandler, topicHandler *handler.TopicHandler, websocketHandler *handler.WebSocketHandler) *gin.Engine {
 	r := gin.Default()
+
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://localhost:3000"},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
@@ -18,6 +19,7 @@ func SetupRouter(authHandler *handler.AuthHandler, userManagementHandler *handle
 		AllowCredentials: true,
 		MaxAge:           12 * time.Hour,
 	}))
+
 	registerPingRoutes(r)
 	registerAuthRoutes(r, authHandler)
 	registerGetAllUserRoutes(r, userManagementHandler)
@@ -85,6 +87,8 @@ func registerDownloadDokumenRoutes(r *gin.Engine, dokumenManagementHandler *hand
 // Topic Router
 func registerTopicRoutes(r *gin.Engine, topicHandler *handler.TopicHandler) {
 	r.GET("/getTopicById", topicHandler.GetTopicById)
+	r.GET("/getAllTopicUser", topicHandler.GetAllTopicUser)
+	r.GET("/getAllTopicUserByidCategories", topicHandler.GetAllTopicUserByidCategories)
 }
 
 // Web Socket
