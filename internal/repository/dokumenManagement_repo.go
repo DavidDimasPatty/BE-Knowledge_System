@@ -5,14 +5,13 @@ import (
 	"be-knowledge/internal/entities"
 	"errors"
 	"os"
-	"path/filepath"
 
 	"github.com/jmoiron/sqlx"
 )
 
 type DokumenManagementRepository interface {
 	GetAllDokumen() (data *dto.DokumenManagement_GetAllDokumen_Response, er error)
-	AddDokumen(data *dto.DokumenManagement_AddDokumen_Request) error
+	AddDokumen(data *dto.DokumenManagement_AddDokumen_Request, filePath string) error
 	EditDokumenGet(id int) (data *entities.Dokumen, er error)
 	EditDokumen(data *dto.DokumenManagement_EditDokumen_Request) error
 	DeleteDokumen(id int) error
@@ -44,28 +43,13 @@ func (r *dokumenManagementRepository) GetAllDokumen() (*dto.DokumenManagement_Ge
 	return &res, nil
 }
 
-func (r *dokumenManagementRepository) AddDokumen(data *dto.DokumenManagement_AddDokumen_Request) error {
-
-	parentPath := os.Getenv("STORAGE_PATH")
-
-	if parentPath == "" {
-		return errors.New("STORAGE_PATH is not set in .env")
-	}
-
-	link := filepath.Join(parentPath, data.FileName)
+func (r *dokumenManagementRepository) AddDokumen(data *dto.DokumenManagement_AddDokumen_Request, filePath string) error {
 
 	query := `
-		INSERT INTO dokumen
-		(link, judul, addId, ADDTIME)
-		VALUES (?, ?, ? ,NOW())
-	`
-
-	_, err := r.db.Exec(query,
-		link,
-		data.Judul,
-		data.AddId,
-	)
-
+        INSERT INTO dokumen (link, judul, addId, ADDTIME)
+        VALUES (?, ?, ?, NOW())
+    `
+	_, err := r.db.Exec(query, filePath, data.Judul, data.AddId)
 	return err
 }
 
