@@ -9,4 +9,7 @@ type Topic_GetAllTopicUser_Response struct {
 type Topic_GetAllTopicUser_Request struct {
 	Username string `form:"username" binding:"required"`
 	IsFavorite *bool `form:"isFavorite"`
+	Search *string `form:"search"`
+	Page *int `form:"page"`
+	Limit *int `form:"limit"`
 }

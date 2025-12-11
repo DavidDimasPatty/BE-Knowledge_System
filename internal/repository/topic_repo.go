@@ -8,7 +8,7 @@ import (
 
 type TopicRepository interface {
 	GetTopicById(id int) (*entities.Topic, error)
-	GetAllTopicUser(username string, isFavorite *bool) ([]entities.Topic, error)
+	GetAllTopicUser(username string, isFavorite *bool, search *string, page *int, limit *int) ([]entities.Topic, error)
 	GetAllTopicUserByidCategories(username string, idCategories int) ([]entities.Topic, error)
 }
 
@@ -38,8 +38,21 @@ func (r *topicRepository) GetTopicById(id int) (*entities.Topic, error) {
 	return &topic, nil
 }
 
-func (r *topicRepository) GetAllTopicUser(username string, isFavorite *bool) ([]entities.Topic, error) {
+func (r *topicRepository) GetAllTopicUser(username string, isFavorite *bool, search *string, page *int, limit *int) ([]entities.Topic, error) {
     topics := []entities.Topic{}
+
+    // Default values jika nil
+    pageVal := 1
+    limitVal := 20
+
+    if page != nil && *page > 0 {
+        pageVal = *page
+    }
+    if limit != nil && *limit > 0 {
+        limitVal = *limit
+    }
+
+    offset := (pageVal - 1) * limitVal
 
     baseQuery := `
         SELECT 
@@ -47,24 +60,32 @@ func (r *topicRepository) GetAllTopicUser(username string, isFavorite *bool) ([]
         FROM topic t 
         LEFT JOIN usertopicfavorite uf 
             ON uf.idTopic = t.id 
-        WHERE t.addId = ? 
+        WHERE t.addId = ?
     `
+    params := []interface{}{username}
 
     // Filter berdasarkan IsFavorite
     if isFavorite != nil {
         if *isFavorite {
-            // hanya favorite
             baseQuery += " AND uf.idTopic IS NOT NULL"
         } else {
-            // hanya non-favorite
             baseQuery += " AND uf.idTopic IS NULL"
         }
     }
 
-    // Urutkan terbaru
-    baseQuery += " ORDER BY t.addTime DESC"
+    // Filter search
+    if search != nil && *search != "" {
+        baseQuery += " AND (t.topic LIKE ? OR t.descriptions LIKE ?)"
+        like := "%" + *search + "%"
+        params = append(params, like, like)
+    }
 
-    err := r.db.Select(&topics, baseQuery, username)
+    // Order & Pagination
+    baseQuery += " ORDER BY t.addTime DESC LIMIT ? OFFSET ?"
+    params = append(params, limitVal, offset)
+
+    // Execute
+    err := r.db.Select(&topics, baseQuery, params...)
     if err != nil {
         return nil, err
     }
