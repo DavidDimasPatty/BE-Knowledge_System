@@ -4,11 +4,12 @@ import (
 	"be-knowledge/internal/entities"
 	"be-knowledge/internal/repository"
 	"errors"
+	"fmt"
 )
 
 type TopicService interface {
 	GetTopicById(id int) (*entities.Topic, error)
-	GetAllTopicUser(username string) ([]entities.Topic, error)
+	GetAllTopicUser(username string, isFavorite *bool) ([]entities.Topic, error)
 	GetAllTopicUserByidCategories(username string, idCategories int) ([]entities.Topic, error)
 }
 
@@ -28,10 +29,10 @@ func (s *topicService) GetTopicById(id int) (*entities.Topic, error) {
 	return topic, nil
 }
 
-func (s *topicService) GetAllTopicUser(username string) ([]entities.Topic, error) {
-	topics, err := s.repo.GetAllTopicUser(username)
+func (s *topicService) GetAllTopicUser(username string, isFavorite *bool) ([]entities.Topic, error) {
+	topics, err := s.repo.GetAllTopicUser(username, isFavorite)
 	if err != nil {
-		return nil, errors.New("gagal mengambil data topic")
+		return nil, fmt.Errorf("gagal mengambil data topic: %w", err)
 	}
 	return topics, nil
 }

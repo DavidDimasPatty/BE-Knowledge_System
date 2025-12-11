@@ -8,7 +8,7 @@ import (
 
 type TopicRepository interface {
 	GetTopicById(id int) (*entities.Topic, error)
-	GetAllTopicUser(username string) ([]entities.Topic, error)
+	GetAllTopicUser(username string, isFavorite *bool) ([]entities.Topic, error)
 	GetAllTopicUserByidCategories(username string, idCategories int) ([]entities.Topic, error)
 }
 
@@ -38,23 +38,38 @@ func (r *topicRepository) GetTopicById(id int) (*entities.Topic, error) {
 	return &topic, nil
 }
 
-func (r *topicRepository) GetAllTopicUser(username string) ([]entities.Topic, error) {
-	topics := []entities.Topic{}
+func (r *topicRepository) GetAllTopicUser(username string, isFavorite *bool) ([]entities.Topic, error) {
+    topics := []entities.Topic{}
 
-	query := `
-		SELECT 
-			*
-		FROM topic
-		WHERE addId = ?
-		ORDER BY ADDTIME DESC
-	`
+    baseQuery := `
+        SELECT 
+            t.* 
+        FROM topic t 
+        LEFT JOIN usertopicfavorite uf 
+            ON uf.idTopic = t.id 
+        WHERE t.addId = ? 
+    `
 
-	err := r.db.Select(&topics, query, username)
-	if err != nil {
-		return nil, err
-	}
+    // Filter berdasarkan IsFavorite
+    if isFavorite != nil {
+        if *isFavorite {
+            // hanya favorite
+            baseQuery += " AND uf.idTopic IS NOT NULL"
+        } else {
+            // hanya non-favorite
+            baseQuery += " AND uf.idTopic IS NULL"
+        }
+    }
 
-	return topics, nil
+    // Urutkan terbaru
+    baseQuery += " ORDER BY t.addTime DESC"
+
+    err := r.db.Select(&topics, baseQuery, username)
+    if err != nil {
+        return nil, err
+    }
+
+    return topics, nil
 }
 
 func (r *topicRepository) GetAllTopicUserByidCategories(username string, idCategories int) ([]entities.Topic, error) {
