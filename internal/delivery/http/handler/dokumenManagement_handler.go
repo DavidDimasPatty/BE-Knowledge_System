@@ -3,7 +3,9 @@ package handler
 import (
 	dto "be-knowledge/internal/delivery/dto/dokumenManagement"
 	"be-knowledge/internal/usecases"
+	"fmt"
 	"net/http"
+	"net/url"
 	"path/filepath"
 	"strconv"
 
@@ -60,16 +62,39 @@ func (h *DokumenManagementHandler) EditDokumenGet(c *gin.Context) {
 }
 
 func (h *DokumenManagementHandler) AddDokumen(c *gin.Context) {
-	var req *dto.DokumenManagement_AddDokumen_Request
+	judul := c.PostForm("judul")
+	addId := c.PostForm("addId")
 
-	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request"})
+	file, err := c.FormFile("file")
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "file is required"})
 		return
 	}
 
-	err := h.dokumenManagementService.AddDokumen(req)
+	f, err := file.Open()
 	if err != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "cannot open file"})
+		return
+	}
+	defer f.Close()
+
+	fileData := make([]byte, file.Size)
+	_, err = f.Read(fileData)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "cannot read file"})
+		return
+	}
+
+	req := &dto.DokumenManagement_AddDokumen_Request{
+		Judul:    judul,
+		AddId:    addId,
+		FileName: file.Filename,
+		FileData: fileData,
+	}
+
+	err = h.dokumenManagementService.AddDokumen(req)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -120,7 +145,7 @@ func (h *DokumenManagementHandler) DeleteDokumen(c *gin.Context) {
 }
 
 func (h *DokumenManagementHandler) DownloadDokumen(c *gin.Context) {
-	var req *dto.DokumenManagement_DeleteDokumen_Request
+	var req *dto.DokumenManagement_DownloadDokumen_Request
 
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request"})
@@ -133,6 +158,12 @@ func (h *DokumenManagementHandler) DownloadDokumen(c *gin.Context) {
 		return
 	}
 
-	c.Header("Content-Disposition", "attachment; filename="+filepath.Base(dok.Link))
-	c.Data(200, "application/octet-stream", fileBytes)
+	//fileName := filepath.Base(dok.Link)
+
+	c.Header("Content-Disposition", "attachment; filename*=UTF-8''"+url.PathEscape(filepath.Base(dok.Link)))
+	c.Header("Content-Type", "application/pdf")
+	c.Header("Content-Length", fmt.Sprintf("%d", len(fileBytes)))
+
+	// Kirim byte langsung
+	c.Data(200, "application/pdf", fileBytes)
 }

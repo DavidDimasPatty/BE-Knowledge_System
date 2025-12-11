@@ -3,6 +3,9 @@ package usecases
 import (
 	dto "be-knowledge/internal/delivery/dto/dokumenManagement"
 	"errors"
+	"io/ioutil"
+	"os"
+	"path/filepath"
 
 	"be-knowledge/internal/entities"
 	"be-knowledge/internal/repository"
@@ -35,7 +38,17 @@ func (s *dokumenManagementService) GetAllDokumen() (data *dto.DokumenManagement_
 }
 
 func (s *dokumenManagementService) AddDokumen(data *dto.DokumenManagement_AddDokumen_Request) error {
-	return s.repo.AddDokumen(data)
+	parentPath := os.Getenv("STORAGE_PATH")
+	if parentPath == "" {
+		return errors.New("STORAGE_PATH is not set")
+	}
+
+	filePath := filepath.Join(parentPath, data.FileName)
+	if err := ioutil.WriteFile(filePath, data.FileData, 0644); err != nil {
+		return err
+	}
+
+	return s.repo.AddDokumen(data, filePath)
 }
 
 func (s *dokumenManagementService) EditDokumenGet(id int) (*entities.Dokumen, error) {
