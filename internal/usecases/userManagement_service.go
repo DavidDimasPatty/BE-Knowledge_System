@@ -10,7 +10,7 @@ import (
 
 type UserManagementService interface {
 	GetAllUser() (data *dto.UserManagement_GetAllUser_Response, er error)
-	AddUser(data *dto.UserManagement_AddUser_Request) error
+	AddUser(data dto.UserManagement_AddUser_Request) error
 	EditUserGet(id int) (data *entities.User, er error)
 	EditUser(data *dto.UserManagement_EditUser_Request) error
 	DeleteUser(id int) error
@@ -33,7 +33,7 @@ func (s *userManagementService) GetAllUser() (*dto.UserManagement_GetAllUser_Res
 	return user, nil
 }
 
-func (s *userManagementService) AddUser(data *dto.UserManagement_AddUser_Request) error {
+func (s *userManagementService) AddUser(data dto.UserManagement_AddUser_Request) error {
 	return s.repo.AddUser(data)
 }
 

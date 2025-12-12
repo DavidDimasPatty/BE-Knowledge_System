@@ -13,7 +13,7 @@ type DokumenManagementRepository interface {
 	GetAllDokumen() (data *dto.DokumenManagement_GetAllDokumen_Response, er error)
 	AddDokumen(data *dto.DokumenManagement_AddDokumen_Request, filePath string) error
 	EditDokumenGet(id int) (data *entities.Dokumen, er error)
-	EditDokumen(data *dto.DokumenManagement_EditDokumen_Request) error
+	EditDokumen(data *dto.DokumenManagement_EditDokumen_Request, filePath *string) error
 	DeleteDokumen(id int) error
 	DownloadDokumen(id int) (*entities.Dokumen, []byte, error)
 }
@@ -65,21 +65,35 @@ func (r *dokumenManagementRepository) EditDokumenGet(id int) (*entities.Dokumen,
 	return &dokumen, nil
 }
 
-func (r *dokumenManagementRepository) EditDokumen(data *dto.DokumenManagement_EditDokumen_Request) error {
-	query := `
+func (r *dokumenManagementRepository) EditDokumen(data *dto.DokumenManagement_EditDokumen_Request, filePath *string) error {
+	var (
+		query string
+		err   error
+	)
+	if filePath != nil {
+		query = `
 		UPDATE dokumen
-		SET  email = ?, noTelp = ?, nama = ?, roles = ?, updId = ?, updTime = NOW()
+		SET  link = ?, judul = ?, updId = ?, updTime = NOW()
 		WHERE id = ?
 	`
-
-	_, err := r.db.Exec(query,
-		data.Email,
-		data.NoTelp,
-		data.Nama,
-		data.RoleId,
-		data.UpdId,
-		data.Id,
-	)
+		_, err = r.db.Exec(query,
+			filePath,
+			data.Judul,
+			data.UpdId,
+			data.Id,
+		)
+	} else {
+		query = `
+		UPDATE dokumen
+		SET  judul = ?, updId = ?, updTime = NOW()
+		WHERE id = ?
+	`
+		_, err = r.db.Exec(query,
+			data.Judul,
+			data.UpdId,
+			data.Id,
+		)
+	}
 
 	return err
 }

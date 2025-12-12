@@ -61,7 +61,26 @@ func (s *dokumenManagementService) EditDokumenGet(id int) (*entities.Dokumen, er
 }
 
 func (s *dokumenManagementService) EditDokumen(data *dto.DokumenManagement_EditDokumen_Request) error {
-	return s.repo.EditDokumen(data)
+	var (
+		parentPath string
+		filePath   *string
+	)
+	if data.FileData != nil {
+		parentPath = os.Getenv("STORAGE_PATH")
+		if parentPath == "" {
+			return errors.New("STORAGE_PATH is not set")
+		}
+
+		fullPath := filepath.Join(parentPath, data.FileName)
+
+		if err := ioutil.WriteFile(fullPath, data.FileData, 0644); err != nil {
+			return err
+		}
+
+		filePath = &(fullPath)
+	}
+
+	return s.repo.EditDokumen(data, filePath)
 }
 
 func (s *dokumenManagementService) DeleteDokumen(id int) error {

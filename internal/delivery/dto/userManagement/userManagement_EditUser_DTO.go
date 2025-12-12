@@ -6,5 +6,5 @@ type UserManagement_EditUser_Request struct {
 	RoleId int    `json:"roleId"`
 	Email  string `json:"email"`
 	NoTelp string `json:"noTelp"`
-	UpdId  string `json:"UpdId"`
+	UpdId  string `json:"updId"`
 }

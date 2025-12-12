@@ -59,10 +59,13 @@ func (h *UserManagementHandler) EditUserGet(c *gin.Context) {
 }
 
 func (h *UserManagementHandler) AddUser(c *gin.Context) {
-	var req *dto.UserManagement_AddUser_Request
+	var req dto.UserManagement_AddUser_Request
 
-	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request"})
+	if err := c.ShouldBindJSON(req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error":  "invalid request",
+			"detail": err.Error(),
+		})
 		return
 	}
 

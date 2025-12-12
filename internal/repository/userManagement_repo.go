@@ -3,13 +3,15 @@ package repository
 import (
 	dto "be-knowledge/internal/delivery/dto/userManagement"
 	"be-knowledge/internal/entities"
+	"crypto/rand"
+	"math/big"
 
 	"github.com/jmoiron/sqlx"
 )
 
 type UserManagementRepository interface {
 	GetAllUser() (data *dto.UserManagement_GetAllUser_Response, er error)
-	AddUser(data *dto.UserManagement_AddUser_Request) error
+	AddUser(data dto.UserManagement_AddUser_Request) error
 	EditUserGet(id int) (data *entities.User, er error)
 	EditUser(data *dto.UserManagement_EditUser_Request) error
 	DeleteUser(id int) error
@@ -40,21 +42,32 @@ func (r *userManagementRepository) GetAllUser() (*dto.UserManagement_GetAllUser_
 	return &res, nil
 }
 
-func (r *userManagementRepository) AddUser(data *dto.UserManagement_AddUser_Request) error {
+func (r *userManagementRepository) AddUser(data dto.UserManagement_AddUser_Request) error {
+	const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+
+	resultPassword := make([]byte, 8)
+	for i := range resultPassword {
+		num, _ := rand.Int(rand.Reader, big.NewInt(int64(len(charset))))
+		resultPassword[i] = charset[num.Int64()]
+	}
+
+	passwordStr := string(resultPassword)
+
 	query := `
-		INSERT INTO users 
-		(email, noTelp, nama, roles, addId, STATUS, addTime)
-		VALUES (?, ?, ?, ?, ?, "Inactive" ,NOW())
-	`
+    INSERT INTO users 
+    (username, PASSWORD, email, noTelp, nama, roles, passwordExpired, addId,divisi, STATUS, addTime)
+    VALUES (?, ?, ?, ?, ?, ?, NOW(), ?,1, "Inactive", NOW())
+`
 
 	_, err := r.db.Exec(query,
+		data.Username,
+		passwordStr,
 		data.Email,
 		data.NoTelp,
 		data.Nama,
 		data.RoleId,
 		data.AddId,
 	)
-
 	return err
 }
 
@@ -71,9 +84,10 @@ func (r *userManagementRepository) EditUserGet(id int) (*entities.User, error) {
 }
 
 func (r *userManagementRepository) EditUser(data *dto.UserManagement_EditUser_Request) error {
+
 	query := `
 		UPDATE users 
-		SET  email = ?, noTelp = ?, nama = ?, roles = ?, updId = ?, updTime = NOW()
+		SET   email = ?, noTelp = ?, nama = ?, roles = ?, updId = ?, updTime = NOW()
 		WHERE id = ?
 	`
 

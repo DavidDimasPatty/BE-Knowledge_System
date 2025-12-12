@@ -105,16 +105,46 @@ func (h *DokumenManagementHandler) AddDokumen(c *gin.Context) {
 }
 
 func (h *DokumenManagementHandler) EditDokumen(c *gin.Context) {
-	var req *dto.DokumenManagement_EditDokumen_Request
-
-	if err := c.ShouldBindJSON(&req); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request"})
+	judul := c.PostForm("judul")
+	updId := c.PostForm("updId")
+	id := c.PostForm("id")
+	intID, err := strconv.Atoi(id)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Id Not Valid"})
 		return
 	}
+	var fileData []byte = nil
+	var fileName string = ""
+	file, err := c.FormFile("file")
+	if err == nil {
+		f, err := file.Open()
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "cannot open file"})
+			return
+		}
+		defer f.Close()
 
-	err := h.dokumenManagementService.EditDokumen(req)
+		fileData = make([]byte, file.Size)
+		_, err = f.Read(fileData)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "cannot read file"})
+			return
+		}
+
+		fileName = file.Filename
+	}
+
+	req := &dto.DokumenManagement_EditDokumen_Request{
+		Id:       intID,
+		Judul:    judul,
+		UpdId:    updId,
+		FileName: fileName,
+		FileData: fileData,
+	}
+
+	err = h.dokumenManagementService.EditDokumen(req)
 	if err != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
