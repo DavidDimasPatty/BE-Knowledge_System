@@ -9,7 +9,7 @@ import (
 
 type TopicService interface {
 	GetTopicById(id int) (*entities.Topic, error)
-	GetAllTopicUser(username string, isFavorite *bool) ([]entities.Topic, error)
+	GetAllTopicUser(username string, isFavorite *bool, search *string, page *int, limit *int) ([]entities.Topic, error)
 	GetAllTopicUserByidCategories(username string, idCategories int) ([]entities.Topic, error)
 }
 
@@ -29,8 +29,8 @@ func (s *topicService) GetTopicById(id int) (*entities.Topic, error) {
 	return topic, nil
 }
 
-func (s *topicService) GetAllTopicUser(username string, isFavorite *bool) ([]entities.Topic, error) {
-	topics, err := s.repo.GetAllTopicUser(username, isFavorite)
+func (s *topicService) GetAllTopicUser(username string, isFavorite *bool, search *string, page *int, limit *int) ([]entities.Topic, error) {
+	topics, err := s.repo.GetAllTopicUser(username, isFavorite, search, page, limit)
 	if err != nil {
 		return nil, fmt.Errorf("gagal mengambil data topic: %w", err)
 	}
