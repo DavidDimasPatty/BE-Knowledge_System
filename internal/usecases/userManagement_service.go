@@ -14,6 +14,7 @@ type UserManagementService interface {
 	EditUserGet(id int) (data *entities.User, er error)
 	EditUser(data dto.UserManagement_EditUser_Request) error
 	DeleteUser(id int) error
+	ChangeStatusUser(data dto.UserManagement_ChangeStatusUser_Request) error
 }
 
 type userManagementService struct {
@@ -52,4 +53,8 @@ func (s *userManagementService) EditUser(data dto.UserManagement_EditUser_Reques
 
 func (s *userManagementService) DeleteUser(id int) error {
 	return s.repo.DeleteUser(id)
+}
+
+func (s *userManagementService) ChangeStatusUser(data dto.UserManagement_ChangeStatusUser_Request) error {
+	return s.repo.ChangeStatusUser(data)
 }

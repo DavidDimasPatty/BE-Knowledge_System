@@ -27,6 +27,7 @@ func SetupRouter(authHandler *handler.AuthHandler, userManagementHandler *handle
 	registerAddUserRoutes(r, userManagementHandler)
 	registerEditUserRoutes(r, userManagementHandler)
 	registerDeleteUserRoutes(r, userManagementHandler)
+	registerchangeStatusUserRoutes(r, userManagementHandler)
 	registerGetAllDokumenRoutes(r, dokumenManagementHandler)
 	registerEditDokumenGet(r, dokumenManagementHandler)
 	registerAddDokumenRoutes(r, dokumenManagementHandler)
@@ -62,6 +63,9 @@ func registerEditUserRoutes(r *gin.Engine, userManagementHandler *handler.UserMa
 }
 func registerDeleteUserRoutes(r *gin.Engine, userManagementHandler *handler.UserManagementHandler) {
 	r.POST("/deleteUser", userManagementHandler.DeleteUser)
+}
+func registerchangeStatusUserRoutes(r *gin.Engine, userManagementHandler *handler.UserManagementHandler) {
+	r.POST("/changeStatusUser", userManagementHandler.ChangeStatusUser)
 }
 
 // Dokumen Router

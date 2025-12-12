@@ -120,3 +120,23 @@ func (h *UserManagementHandler) DeleteUser(c *gin.Context) {
 		"data":    nil,
 	})
 }
+
+func (h *UserManagementHandler) ChangeStatusUser(c *gin.Context) {
+	var req dto.UserManagement_ChangeStatusUser_Request
+
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request"})
+		return
+	}
+
+	err := h.userManagementService.ChangeStatusUser(req)
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Success",
+		"data":    nil,
+	})
+}

@@ -5,9 +5,12 @@ import (
 	"be-knowledge/internal/entities"
 	"crypto/rand"
 	"errors"
+	"fmt"
 	"math/big"
 
 	"github.com/jmoiron/sqlx"
+	"golang.org/x/crypto/bcrypt"
+	"gopkg.in/gomail.v2"
 )
 
 type UserManagementRepository interface {
@@ -16,6 +19,7 @@ type UserManagementRepository interface {
 	EditUserGet(id int) (data *entities.User, er error)
 	EditUser(data dto.UserManagement_EditUser_Request) error
 	DeleteUser(id int) error
+	ChangeStatusUser(data dto.UserManagement_ChangeStatusUser_Request) error
 }
 
 type userManagementRepository struct {
@@ -66,6 +70,11 @@ func (r *userManagementRepository) AddUser(data dto.UserManagement_AddUser_Reque
 
 	passwordStr := string(resultPassword)
 
+	hashedPass, errHash := bcrypt.GenerateFromPassword([]byte(passwordStr), bcrypt.DefaultCost)
+	if errHash != nil {
+		return errHash
+	}
+
 	query := `
     INSERT INTO users 
     (username, PASSWORD, email, noTelp, nama, roles, passwordExpired, addId,divisi, STATUS, addTime)
@@ -74,13 +83,16 @@ func (r *userManagementRepository) AddUser(data dto.UserManagement_AddUser_Reque
 
 	_, err := r.db.Exec(query,
 		data.Username,
-		passwordStr,
+		string(hashedPass),
 		data.Email,
 		data.NoTelp,
 		data.Nama,
 		data.RoleId,
 		data.AddId,
 	)
+
+	go sendEmail(data.Email, data.Username, passwordStr)
+
 	return err
 }
 
@@ -132,4 +144,50 @@ func (r *userManagementRepository) DeleteUser(id int) error {
 
 	_, err := r.db.Exec(query, id)
 	return err
+}
+
+func (r *userManagementRepository) ChangeStatusUser(data dto.UserManagement_ChangeStatusUser_Request) error {
+
+	var checkUser int
+	querySelect := "SELECT count(*) FROM users WHERE  id = ?"
+
+	errSelect := r.db.Get(&checkUser, querySelect, data.Id)
+	if errSelect != nil {
+		return errSelect
+	}
+
+	if checkUser == 0 {
+		return errors.New("user not found")
+	}
+
+	query := "UPDATE users set status = ? where id = ?"
+
+	var statusFinal string
+	if data.Status == "Active" {
+		statusFinal = "Block"
+	} else {
+		statusFinal = "Active"
+	}
+	_, err := r.db.Exec(query, statusFinal, data.Id)
+	return err
+}
+
+func sendEmail(to, username, password string) error {
+	m := gomail.NewMessage()
+
+	m.SetHeader("From", "ikodora.official@gmail.com")
+	m.SetHeader("To", to)
+	m.SetHeader("Subject", "Your Account Information")
+
+	body := fmt.Sprintf(
+		"Your account has been created.\n\nUsername: %s\nPassword: %s\n\nPlease change your password after login.",
+		username,
+		password,
+	)
+
+	m.SetBody("text/plain", body)
+
+	d := gomail.NewDialer("smtp.gmail.com", 587, "ikodora.official@gmail.com", "itsjprcgtuhrfsdf")
+
+	return d.DialAndSend(m)
 }
