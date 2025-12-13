@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRouter(authHandler *handler.AuthHandler, userManagementHandler *handler.UserManagementHandler, dokumenManagementHandler *handler.DokumenManagementHandler, topicHandler *handler.TopicHandler, websocketHandler *handler.WebSocketHandler) *gin.Engine {
+func SetupRouter(authHandler *handler.AuthHandler, userManagementHandler *handler.UserManagementHandler, dokumenManagementHandler *handler.DokumenManagementHandler, topicHandler *handler.TopicHandler, websocketHandler *handler.WebSocketHandler, categoryHandler *handler.CategoryHandler) *gin.Engine {
 	r := gin.Default()
 
 	r.Use(cors.New(cors.Config{
@@ -36,6 +36,7 @@ func SetupRouter(authHandler *handler.AuthHandler, userManagementHandler *handle
 	registerDownloadDokumenRoutes(r, dokumenManagementHandler)
 	registerTopicRoutes(r, topicHandler)
 	registerWSChat(r, websocketHandler)
+	registerCategoryRoutes(r, categoryHandler)
 	return r
 }
 
@@ -98,4 +99,9 @@ func registerTopicRoutes(r *gin.Engine, topicHandler *handler.TopicHandler) {
 // Web Socket
 func registerWSChat(r *gin.Engine, WebSocketHandler *handler.WebSocketHandler) {
 	r.GET("/ws", WebSocketHandler.Handle)
+}
+
+// Category Router
+func registerCategoryRoutes(r *gin.Engine, categoryHandler *handler.CategoryHandler) {
+	r.GET("/getAllCategoryUser", categoryHandler.GetAllCategoryUser)
 }

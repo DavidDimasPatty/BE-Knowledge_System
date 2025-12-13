@@ -42,3 +42,8 @@ func UserManagementLog(message, endpoint string) {
 func TopicLog(message, endpoint string) {
 	write("tracelog_topic", message, endpoint)
 }
+
+// Untuk Category
+func CategoryLog(message, endpoint string) {
+	write("tracelog_category", message, endpoint)
+}
