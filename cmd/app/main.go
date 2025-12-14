@@ -50,9 +50,13 @@ func main() {
 	// WebSocket Handler
 	wsManager := handler.NewWebSocketManager()
 	websocketHandler := handler.NewWebSocketHandler(wsManager)
+	//Category Handler
+	categoryRepo := repository.NewCategoryRepository(db)
+	categoryService := usecases.NewCategoryService(categoryRepo)
+	categoryHandler := handler.NewCategoryHandler(categoryService)
 
 	// router
-	r := router.SetupRouter(authHandler, userManagementHandler, dokumenManagementHandler, topicHandler, websocketHandler)
+	r := router.SetupRouter(authHandler, userManagementHandler, dokumenManagementHandler, topicHandler, websocketHandler, categoryHandler)
 
 	// run server
 	port := fmt.Sprintf(":%s", cfg.AppPort)
