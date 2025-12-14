@@ -25,6 +25,9 @@ func NewWebSocketHandler(manager *WebSocketManager) *WebSocketHandler {
 
 func (h *WebSocketHandler) Handle(c *gin.Context) {
 	userId := c.Query("userId")
+	idCategory := c.Query("idCategory")
+	topic := c.Query("topic")
+
 	if userId == "" {
 		c.JSON(400, gin.H{"error": "userId is required"})
 		return
@@ -47,7 +50,9 @@ func (h *WebSocketHandler) Handle(c *gin.Context) {
 		}
 
 		prompt := url.QueryEscape(string(msg))
-		resp, err := http.Get("http://localhost:9090/ask?question=" + prompt)
+		resp, err := http.Get("http://localhost:9090/ask?question=" + prompt +
+			"&idCategory=" + idCategory + "&topic=" + topic + "&username=David")
+
 		if err != nil {
 			h.manager.SendToUser(userId, "AI error")
 			continue
