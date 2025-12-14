@@ -54,9 +54,13 @@ func main() {
 	categoryRepo := repository.NewCategoryRepository(db)
 	categoryService := usecases.NewCategoryService(categoryRepo)
 	categoryHandler := handler.NewCategoryHandler(categoryService)
+	//Home Handler
+	homeRepo := repository.NewHomeRepository(db)
+	homeService := usecases.NewHomeService(homeRepo)
+	homeHandler := handler.NewHomeHandler(homeService)
 
 	// router
-	r := router.SetupRouter(authHandler, userManagementHandler, dokumenManagementHandler, topicHandler, websocketHandler, categoryHandler)
+	r := router.SetupRouter(authHandler, userManagementHandler, dokumenManagementHandler, topicHandler, websocketHandler, categoryHandler, homeHandler)
 
 	// run server
 	port := fmt.Sprintf(":%s", cfg.AppPort)

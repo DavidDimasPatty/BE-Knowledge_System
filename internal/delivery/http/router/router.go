@@ -8,7 +8,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRouter(authHandler *handler.AuthHandler, userManagementHandler *handler.UserManagementHandler, dokumenManagementHandler *handler.DokumenManagementHandler, topicHandler *handler.TopicHandler, websocketHandler *handler.WebSocketHandler, categoryHandler *handler.CategoryHandler) *gin.Engine {
+func SetupRouter(authHandler *handler.AuthHandler,
+	userManagementHandler *handler.UserManagementHandler,
+	dokumenManagementHandler *handler.DokumenManagementHandler,
+	topicHandler *handler.TopicHandler,
+	websocketHandler *handler.WebSocketHandler,
+	categoryHandler *handler.CategoryHandler,
+	homeHandler *handler.HomeHandler,
+) *gin.Engine {
 	r := gin.Default()
 
 	r.Use(cors.New(cors.Config{
@@ -37,6 +44,7 @@ func SetupRouter(authHandler *handler.AuthHandler, userManagementHandler *handle
 	registerTopicRoutes(r, topicHandler)
 	registerWSChat(r, websocketHandler)
 	registerCategoryRoutes(r, categoryHandler)
+	registerHistoryChatRoutes(r, homeHandler)
 	return r
 }
 
@@ -87,6 +95,11 @@ func registerDeleteDokumenRoutes(r *gin.Engine, dokumenManagementHandler *handle
 }
 func registerDownloadDokumenRoutes(r *gin.Engine, dokumenManagementHandler *handler.DokumenManagementHandler) {
 	r.POST("/downloadDokumen", dokumenManagementHandler.DownloadDokumen)
+}
+
+// load History Chat
+func registerHistoryChatRoutes(r *gin.Engine, homeHandler *handler.HomeHandler) {
+	r.GET("/", homeHandler.GetHistoryChat)
 }
 
 // Topic Router
