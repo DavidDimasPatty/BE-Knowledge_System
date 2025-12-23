@@ -35,11 +35,12 @@ func (r *categoryRepository) GetAllCategoryUser(username string, search *string,
 	offset := (pageVal - 1) * limitVal
 
 	baseQuery := `
-        SELECT 
+        SELECT DISTINCT
             c.*, i.nama AS nama_icon
-        FROM categories c 
-		LEFT JOIN icon i ON c.icon = i.id
-        WHERE c.addId = ?
+        FROM topic t 
+		LEFT JOIN categories c ON c.id = t.idCategories
+		LEFT JOIN icon i ON i.id = c.icon
+        WHERE t.addId = ?
     `
 	params := []interface{}{username}
 
@@ -51,7 +52,7 @@ func (r *categoryRepository) GetAllCategoryUser(username string, search *string,
 	}
 
 	// Order & Pagination
-	baseQuery += " ORDER BY c.addTime DESC LIMIT ? OFFSET ?"
+	baseQuery += " ORDER BY t.addTime DESC LIMIT ? OFFSET ?"
 	params = append(params, limitVal, offset)
 
 	// Execute
