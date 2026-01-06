@@ -52,7 +52,7 @@ func (r *categoryRepository) GetAllCategoryUser(username string, search *string,
 	}
 
 	// Order & Pagination
-	baseQuery += " ORDER BY t.addTime DESC LIMIT ? OFFSET ?"
+	baseQuery += " ORDER BY c.addTime DESC LIMIT ? OFFSET ?"
 	params = append(params, limitVal, offset)
 
 	// Execute
