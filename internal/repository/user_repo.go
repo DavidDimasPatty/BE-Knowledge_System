@@ -6,6 +6,8 @@ import (
 	"github.com/jmoiron/sqlx"
 
 	"time"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 type UserRepository interface {
@@ -14,6 +16,7 @@ type UserRepository interface {
 	BlockUser(id int, blockDate time.Time) error
 	IncrementLoginCount(id int) error
 	ResetLoginCount(id int) error
+	ChangePassword(username string, newPassword string, oldPassword string) error
 }
 
 type userRepository struct {
@@ -63,13 +66,41 @@ func (r *userRepository) BlockUser(id int, blockDate time.Time) error {
 }
 
 func (r *userRepository) IncrementLoginCount(id int) error {
-    query := "UPDATE users SET loginCount = loginCount + 1 WHERE id = ?"
-    _, err := r.db.Exec(query, id)
-    return err
+	query := "UPDATE users SET loginCount = loginCount + 1 WHERE id = ?"
+	_, err := r.db.Exec(query, id)
+	return err
 }
 
 func (r *userRepository) ResetLoginCount(id int) error {
-    query := "UPDATE users SET loginCount = 0 WHERE id = ?"
-    _, err := r.db.Exec(query, id)
-    return err
+	query := "UPDATE users SET loginCount = 0 WHERE id = ?"
+	_, err := r.db.Exec(query, id)
+	return err
+}
+
+func (r *userRepository) ChangePassword(username string, newPassword string, oldPassword string) error {
+	hashedPass, errHash := bcrypt.GenerateFromPassword([]byte(newPassword), bcrypt.DefaultCost)
+	if errHash != nil {
+		return errHash
+	}
+
+	hashedOldPass, errHash := bcrypt.GenerateFromPassword([]byte(oldPassword), bcrypt.DefaultCost)
+	if errHash != nil {
+		return errHash
+	}
+
+	query := `
+    update users set password=?, oldPassword=?, passwordExpired=DATE_ADD(NOW(), INTERVAL 3 MONTH)
+	where username=?`
+
+	_, err := r.db.Exec(query,
+		string(hashedPass),
+		string(hashedOldPass),
+		username,
+	)
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

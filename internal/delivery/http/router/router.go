@@ -55,6 +55,7 @@ func registerPingRoutes(r *gin.Engine) {
 
 func registerAuthRoutes(r *gin.Engine, authHandler *handler.AuthHandler) {
 	r.POST("/login", authHandler.Login)
+	r.POST("/editPassword", authHandler.EditPassword)
 }
 
 // UserManagement Router
