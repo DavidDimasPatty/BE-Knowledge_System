@@ -10,6 +10,7 @@ type TopicRepository interface {
 	GetTopicById(id int) (*entities.Topic, error)
 	GetAllTopicUser(username string, isFavorite *bool, search *string, page *int, limit *int) ([]entities.Topic, error)
 	GetAllTopicUserByidCategories(username string, idCategories int) ([]entities.Topic, error)
+	EditFavoriteTopic(username string, idTopic int, like int) error
 }
 
 type topicRepository struct {
@@ -39,22 +40,22 @@ func (r *topicRepository) GetTopicById(id int) (*entities.Topic, error) {
 }
 
 func (r *topicRepository) GetAllTopicUser(username string, isFavorite *bool, search *string, page *int, limit *int) ([]entities.Topic, error) {
-    topics := []entities.Topic{}
+	topics := []entities.Topic{}
 
-    // Default values jika nil
-    pageVal := 1
-    limitVal := 20
+	// Default values jika nil
+	pageVal := 1
+	limitVal := 20
 
-    if page != nil && *page > 0 {
-        pageVal = *page
-    }
-    if limit != nil && *limit > 0 {
-        limitVal = *limit
-    }
+	if page != nil && *page > 0 {
+		pageVal = *page
+	}
+	if limit != nil && *limit > 0 {
+		limitVal = *limit
+	}
 
-    offset := (pageVal - 1) * limitVal
+	offset := (pageVal - 1) * limitVal
 
-    baseQuery := `
+	baseQuery := `
         SELECT 
             t.* 
         FROM topic t 
@@ -62,35 +63,35 @@ func (r *topicRepository) GetAllTopicUser(username string, isFavorite *bool, sea
             ON uf.idTopic = t.id 
         WHERE t.addId = ?
     `
-    params := []interface{}{username}
+	params := []interface{}{username}
 
-    // Filter berdasarkan IsFavorite
-    if isFavorite != nil {
-        if *isFavorite {
-            baseQuery += " AND uf.idTopic IS NOT NULL"
-        } else {
-            baseQuery += " AND uf.idTopic IS NULL"
-        }
-    }
+	// Filter berdasarkan IsFavorite
+	if isFavorite != nil {
+		if *isFavorite {
+			baseQuery += " AND uf.idTopic IS NOT NULL"
+		} else {
+			baseQuery += " AND uf.idTopic IS NULL"
+		}
+	}
 
-    // Filter search
-    if search != nil && *search != "" {
-        baseQuery += " AND (t.topic LIKE ? OR t.descriptions LIKE ?)"
-        like := "%" + *search + "%"
-        params = append(params, like, like)
-    }
+	// Filter search
+	if search != nil && *search != "" {
+		baseQuery += " AND (t.topic LIKE ? OR t.descriptions LIKE ?)"
+		like := "%" + *search + "%"
+		params = append(params, like, like)
+	}
 
-    // Order & Pagination
-    baseQuery += " ORDER BY t.addTime DESC LIMIT ? OFFSET ?"
-    params = append(params, limitVal, offset)
+	// Order & Pagination
+	baseQuery += " ORDER BY t.addTime DESC LIMIT ? OFFSET ?"
+	params = append(params, limitVal, offset)
 
-    // Execute
-    err := r.db.Select(&topics, baseQuery, params...)
-    if err != nil {
-        return nil, err
-    }
+	// Execute
+	err := r.db.Select(&topics, baseQuery, params...)
+	if err != nil {
+		return nil, err
+	}
 
-    return topics, nil
+	return topics, nil
 }
 
 func (r *topicRepository) GetAllTopicUserByidCategories(username string, idCategories int) ([]entities.Topic, error) {
@@ -110,4 +111,16 @@ func (r *topicRepository) GetAllTopicUserByidCategories(username string, idCateg
 	}
 
 	return topics, nil
+}
+
+func (r *topicRepository) EditFavoriteTopic(username string, idTopic int, like int) error {
+	var err error
+	if like == 0 {
+		query := "DELETE FROM usertopicfavorite WHERE idTopic = ? and addId=?"
+		_, err = r.db.Exec(query, idTopic, username)
+	} else {
+		query := "INSERT INTO usertopicfavorite values(?,now(),?)"
+		_, err = r.db.Exec(query, idTopic, username)
+	}
+	return err
 }

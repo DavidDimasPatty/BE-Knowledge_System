@@ -98,3 +98,23 @@ func (h *TopicHandler) GetAllTopicUserByidCategories(c *gin.Context) {
 		"data":    topics,
 	})
 }
+
+func (h *TopicHandler) EditFavoriteTopic(c *gin.Context) {
+	var req *dto.Topic_EditFavoriteTopic_Request
+
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request"})
+		return
+	}
+
+	err := h.topicService.EditFavoriteTopic(req.Username, req.IdTopic, req.Like)
+	if err != nil {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"message": "Success",
+		"data":    nil,
+	})
+}

@@ -108,6 +108,7 @@ func registerTopicRoutes(r *gin.Engine, topicHandler *handler.TopicHandler) {
 	r.GET("/getTopicById", topicHandler.GetTopicById)
 	r.GET("/getAllTopicUser", topicHandler.GetAllTopicUser)
 	r.GET("/getAllTopicUserByidCategories", topicHandler.GetAllTopicUserByidCategories)
+	r.POST("/editFavTopic", topicHandler.EditFavoriteTopic)
 }
 
 // Web Socket

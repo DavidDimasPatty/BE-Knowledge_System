@@ -11,6 +11,7 @@ type TopicService interface {
 	GetTopicById(id int) (*entities.Topic, error)
 	GetAllTopicUser(username string, isFavorite *bool, search *string, page *int, limit *int) ([]entities.Topic, error)
 	GetAllTopicUserByidCategories(username string, idCategories int) ([]entities.Topic, error)
+	EditFavoriteTopic(username string, idTopic int, like int) error
 }
 
 type topicService struct {
@@ -43,4 +44,8 @@ func (s *topicService) GetAllTopicUserByidCategories(username string, idCategori
 		return nil, errors.New("gagal mengambil data topic")
 	}
 	return topics, nil
+}
+
+func (s *topicService) EditFavoriteTopic(username string, idTopic int, like int) error {
+	return s.repo.EditFavoriteTopic(username, idTopic, like)
 }
