@@ -26,9 +26,10 @@ func NewWebSocketHandler(manager *WebSocketManager) *WebSocketHandler {
 
 func (h *WebSocketHandler) Handle(c *gin.Context) {
 	userId := c.Query("userId")
-	idCategory := c.Query("idCategory")
-	topic := c.Query("topic")
+	// idCategory := c.Query("idCategory")
+	// topic := c.Query("topic")
 	username := c.Query("username")
+	// isFirst := c.Query("isFirst")
 
 	if userId == "" {
 		c.JSON(400, gin.H{"error": "userId is required"})
@@ -44,10 +45,17 @@ func (h *WebSocketHandler) Handle(c *gin.Context) {
 	h.manager.AddClient(userId, conn)
 	defer h.manager.RemoveClient(userId)
 	type AIResponse struct {
-		Answer     string `json:"answer"`
-		TopicID    int    `json:"topic_id"`
-		CategoryID int    `json:"category_id"`
-		Error      string `json:"error,omitempty"`
+		Answer   string `json:"answer"`
+		Topic    int    `json:"topic_id"`
+		Category int    `json:"category_id"`
+		Error    string `json:"error,omitempty"`
+	}
+
+	type ClientMessage struct {
+		Text       string `json:"text"`
+		IsFirst    bool   `json:"isFirst"`
+		IdCategory int    `json:"idCategory"`
+		Topic      int    `json:"topic"`
 	}
 
 	for {
@@ -56,16 +64,27 @@ func (h *WebSocketHandler) Handle(c *gin.Context) {
 			return
 		}
 
-		prompt := url.QueryEscape(string(msg))
+		var clientMsg ClientMessage
+		if err := json.Unmarshal(msg, &clientMsg); err != nil {
+			h.manager.SendToUser(userId, `{"error":"invalid message format"}`)
+			continue
+		}
+
+		prompt := url.QueryEscape(clientMsg.Text)
+		isFirst := clientMsg.IsFirst
+		idCategory := clientMsg.IdCategory
+		topic := clientMsg.Topic
+		//username := clientMsg.Username
+		//prompt := url.QueryEscape(string(msg))
 		resp, err := http.Get(
 			"http://localhost:9090/ask?question=" + prompt +
-				"&idCategory=" + idCategory +
-				"&topic=" + topic +
-				"&username=" + username,
+				"&idCategory=" + strconv.Itoa(idCategory) +
+				"&topic=" + strconv.Itoa(topic) +
+				"&username=" + username + "&isFirst=" + strconv.FormatBool(isFirst),
 		)
 
 		if err != nil {
-			h.manager.SendToUser(userId, "AI error")
+			h.manager.SendToUser(userId, "Internal error")
 			continue
 		}
 
@@ -78,14 +97,19 @@ func (h *WebSocketHandler) Handle(c *gin.Context) {
 				return
 			}
 
-			if aiResp.TopicID != 0 {
-				topic = strconv.Itoa(aiResp.TopicID)
-			}
-			if aiResp.CategoryID != 0 {
-				idCategory = strconv.Itoa(aiResp.CategoryID)
+			// if aiResp.Topic != "" {
+			// 	topic = aiResp.Topic
+			// }
+			// if aiResp.Category != "" {
+			// 	idCategory = aiResp.Category
+			// }
+
+			payload, err := json.Marshal(aiResp)
+			if err != nil {
+				h.manager.SendToUser(userId, `{"error":"encode failed"}`)
+				return
 			}
 
-			payload, _ := json.Marshal(aiResp)
 			h.manager.SendToUser(userId, string(payload))
 		}()
 	}
