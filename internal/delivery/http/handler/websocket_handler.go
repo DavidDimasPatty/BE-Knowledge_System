@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"bufio"
 	"encoding/json"
 	"net/http"
 	"net/url"
@@ -29,6 +30,7 @@ func (h *WebSocketHandler) Handle(c *gin.Context) {
 	// idCategory := c.Query("idCategory")
 	// topic := c.Query("topic")
 	username := c.Query("username")
+	role := c.Query("roleName")
 	// isFirst := c.Query("isFirst")
 
 	if userId == "" {
@@ -79,7 +81,7 @@ func (h *WebSocketHandler) Handle(c *gin.Context) {
 		resp, err := http.Get(
 			"http://localhost:9090/ask?question=" + prompt +
 				"&idCategory=" + strconv.Itoa(idCategory) +
-				"&topic=" + strconv.Itoa(topic) +
+				"&topic=" + strconv.Itoa(topic) + "&role=" + role +
 				"&username=" + username + "&isFirst=" + strconv.FormatBool(isFirst),
 		)
 
@@ -88,29 +90,51 @@ func (h *WebSocketHandler) Handle(c *gin.Context) {
 			continue
 		}
 
+		// func() {
+		// 	defer resp.Body.Close()
+
+		// 	var aiResp AIResponse
+		// 	if err := json.NewDecoder(resp.Body).Decode(&aiResp); err != nil {
+		// 		h.manager.SendToUser(userId, `{"error":"invalid AI response"}`)
+		// 		return
+		// 	}
+
+		// 	// if aiResp.Topic != "" {
+		// 	// 	topic = aiResp.Topic
+		// 	// }
+		// 	// if aiResp.Category != "" {
+		// 	// 	idCategory = aiResp.Category
+		// 	// }
+
+		// 	payload, err := json.Marshal(aiResp)
+		// 	if err != nil {
+		// 		h.manager.SendToUser(userId, `{"error":"encode failed"}`)
+		// 		return
+		// 	}
+
+		// 	h.manager.SendToUser(userId, string(payload))
+		// }()
 		func() {
 			defer resp.Body.Close()
 
-			var aiResp AIResponse
-			if err := json.NewDecoder(resp.Body).Decode(&aiResp); err != nil {
-				h.manager.SendToUser(userId, `{"error":"invalid AI response"}`)
-				return
+			reader := bufio.NewReader(resp.Body)
+
+			for {
+				line, err := reader.ReadBytes('\n')
+				if err != nil {
+					// stream selesai
+					break
+				}
+
+				// validasi JSON
+				var chunk map[string]interface{}
+				if err := json.Unmarshal(line, &chunk); err != nil {
+					continue
+				}
+
+				// forward ke client (React)
+				h.manager.SendToUser(userId, string(line))
 			}
-
-			// if aiResp.Topic != "" {
-			// 	topic = aiResp.Topic
-			// }
-			// if aiResp.Category != "" {
-			// 	idCategory = aiResp.Category
-			// }
-
-			payload, err := json.Marshal(aiResp)
-			if err != nil {
-				h.manager.SendToUser(userId, `{"error":"encode failed"}`)
-				return
-			}
-
-			h.manager.SendToUser(userId, string(payload))
 		}()
 	}
 }

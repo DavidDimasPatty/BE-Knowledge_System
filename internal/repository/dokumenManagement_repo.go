@@ -3,8 +3,13 @@ package repository
 import (
 	dto "be-knowledge/internal/delivery/dto/dokumenManagement"
 	"be-knowledge/internal/entities"
+	"bytes"
+	"encoding/json"
 	"errors"
+	"fmt"
+	"net/http"
 	"os"
+	"path"
 
 	"github.com/jmoiron/sqlx"
 )
@@ -50,6 +55,35 @@ func (r *dokumenManagementRepository) AddDokumen(data *dto.DokumenManagement_Add
         VALUES (?, ?, ?, NOW())
     `
 	_, err := r.db.Exec(query, filePath, data.Judul, data.AddId)
+
+	payload := map[string]string{
+		"file_path": path.Base(filePath),
+	}
+
+	jsonData, _ := json.Marshal(payload)
+
+	req, err := http.NewRequest(
+		"POST",
+		"http://localhost:9090/insertDocument",
+		bytes.NewBuffer(jsonData),
+	)
+	if err != nil {
+		return err
+	}
+
+	req.Header.Set("Content-Type", "application/json")
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("python api failed: %s", resp.Status)
+	}
+
 	return err
 }
 
@@ -71,13 +105,52 @@ func (r *dokumenManagementRepository) EditDokumen(data *dto.DokumenManagement_Ed
 		err   error
 	)
 	if filePath != nil {
+		//delete
+		dokumenOld := entities.Dokumen{}
+		selectQuery := "SELECT * FROM dokumen WHERE id = ?"
+		if err := r.db.Get(&dokumenOld, selectQuery, data.Id); err != nil {
+			return err
+		}
+
+		payload := map[string]string{
+			"file_path_old": path.Base(dokumenOld.Link),
+			"file_path_new": path.Base(*filePath),
+		}
+
+		jsonData, err := json.Marshal(payload)
+		if err != nil {
+			return err
+		}
+
+		req, err := http.NewRequest(
+			"POST",
+			"http://localhost:9090/editDocument",
+			bytes.NewBuffer(jsonData),
+		)
+		if err != nil {
+			return err
+		}
+
+		req.Header.Set("Content-Type", "application/json")
+
+		client := &http.Client{}
+		resp, err := client.Do(req)
+		if err != nil {
+			return err
+		}
+		defer resp.Body.Close()
+
+		if resp.StatusCode != http.StatusOK {
+			return fmt.Errorf("python api failed: %s", resp.Status)
+		}
+
 		query = `
 		UPDATE dokumen
 		SET  link = ?, judul = ?, updId = ?, updTime = NOW()
 		WHERE id = ?
 	`
 		_, err = r.db.Exec(query,
-			filePath,
+			*filePath,
 			data.Judul,
 			data.UpdId,
 			data.Id,
@@ -99,9 +172,45 @@ func (r *dokumenManagementRepository) EditDokumen(data *dto.DokumenManagement_Ed
 }
 
 func (r *dokumenManagementRepository) DeleteDokumen(id int) error {
-	query := "DELETE FROM dokumen WHERE id = ?"
+	dokumen := entities.Dokumen{}
+	selectQuery := "SELECT * FROM dokumen WHERE id = ?"
+	if err := r.db.Get(&dokumen, selectQuery, id); err != nil {
+		return err
+	}
 
-	_, err := r.db.Exec(query, id)
+	deleteQuery := "DELETE FROM dokumen WHERE id = ?"
+	if _, err := r.db.Exec(deleteQuery, id); err != nil {
+		return err
+	}
+
+	payload := map[string]string{
+		"filename": path.Base(dokumen.Link),
+	}
+
+	jsonData, _ := json.Marshal(payload)
+
+	req, err := http.NewRequest(
+		"POST",
+		"http://localhost:9090/deleteDocument",
+		bytes.NewBuffer(jsonData),
+	)
+	if err != nil {
+		return err
+	}
+
+	req.Header.Set("Content-Type", "application/json")
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("python api failed: %s", resp.Status)
+	}
+
 	return err
 }
 
