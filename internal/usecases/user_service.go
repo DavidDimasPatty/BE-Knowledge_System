@@ -4,23 +4,37 @@ import (
 	"errors"
 	"time"
 
+	"be-knowledge/configs"
 	"be-knowledge/internal/entities"
 	"be-knowledge/internal/repository"
 
 	"golang.org/x/crypto/bcrypt"
+
+	"crypto/rand"
+	"encoding/hex"
+	"fmt"
 )
 
 type UserService interface {
 	Login(username, password string) (*entities.User, error)
 	EditPassword(username string, newPassword string, oldPassword string) error
+	SendEmailResetPassword(email string) error
+	ValidateResetToken(token string) error
+	ResetPassword(token, newPassword string) error
 }
 
 type userService struct {
-	repo repository.UserRepository
+	repo         repository.UserRepository
+	config       *configs.Config
+	emailService EmailService
 }
 
-func NewUserService(repo repository.UserRepository) UserService {
-	return &userService{repo}
+func NewUserService(repo repository.UserRepository, cfg *configs.Config, emailService EmailService) UserService {
+	return &userService{
+		repo:         repo,
+		config:       cfg,
+		emailService: emailService,
+	}
 }
 
 func (s *userService) Login(username, password string) (*entities.User, error) {
@@ -109,6 +123,143 @@ func (s *userService) EditPassword(username string, newPassword string, oldPassw
 	err = s.repo.ChangePassword(username, newPassword, oldPassword)
 	if err != nil {
 		return errors.New("Internal Error")
+	}
+
+	return nil
+}
+
+func (s *userService) SendEmailResetPassword(email string) error {
+	user, err := s.repo.GetByEmail(email)
+	if err != nil {
+		// return errors.New("email tidak ditemukan")
+		return nil
+	}
+
+	// Cek apakah user sudah diblock
+	if user.Status != nil && *user.Status == "Block" {
+		return errors.New("akun anda diblok, hubungi admin")
+	}
+
+	if user.Status != nil && *user.Status == "Inactive" {
+		return errors.New("akun anda belum aktif, hubungi admin")
+	}
+
+	token, err := generateResetToken()
+	if err != nil {
+		return err
+	}
+
+	addTime := time.Now()
+	expiredDate := addTime.Add(30 * time.Minute)
+
+	err = s.repo.SaveResetToken(user.ID, token, expiredDate, addTime)
+	if err != nil {
+		return err
+	}
+
+	resetLink := fmt.Sprintf(
+		"%s/reset-password?token=%s",
+		s.config.FrontendURL,
+		token,
+	)
+
+	subject := "Reset Password"
+	body := fmt.Sprintf(
+		"Halo %s,\n\n"+
+			"Klik link berikut untuk reset password:\n\n%s\n\n"+
+			"Link ini berlaku selama 30 menit.\n\n"+
+			"Jika Anda tidak merasa melakukan permintaan ini, abaikan email ini.",
+		user.Username,
+		resetLink,
+	)
+
+	if user.Email == nil || *user.Email == "" {
+		return errors.New("email user tidak valid")
+	}
+
+	return s.emailService.SendEmail(
+		*user.Email,
+		subject,
+		body,
+	)
+}
+
+func generateResetToken() (string, error) {
+	bytes := make([]byte, 32)
+	_, err := rand.Read(bytes)
+	if err != nil {
+		return "", err
+	}
+	return hex.EncodeToString(bytes), nil
+}
+
+func (s *userService) ValidateResetToken(token string) error {
+	data, err := s.repo.GetResetToken(token)
+	if err != nil {
+		return errors.New("token tidak valid")
+	}
+
+	if *data.IsReset == "Y" {
+		return errors.New("token sudah digunakan")
+	}
+
+	if time.Now().After(*data.ExpiredDate) {
+		return errors.New("token sudah kadaluarsa")
+	}
+
+	return nil
+}
+
+func (s *userService) ResetPassword(token string, newPassword string) error {
+	// Ambil token
+	resetData, err := s.repo.GetResetToken(token)
+	if err != nil {
+		return errors.New("token tidak valid")
+	}
+
+	// Validasi token
+	if *resetData.IsReset == "Y" {
+		return errors.New("token sudah digunakan")
+	}
+
+	if time.Now().After(*resetData.ExpiredDate) {
+		return errors.New("token sudah kedaluwarsa")
+	}
+
+	// Ambil user
+	user, err := s.repo.GetById(resetData.User_Id)
+	if err != nil {
+		return errors.New("user tidak ditemukan")
+	}
+
+	// cegah password sama dengan password sekarang
+	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(newPassword))
+	if err == nil {
+		return errors.New("password baru tidak boleh sama dengan password sekarang")
+	}
+
+	// cegah password sama dengan password sebelumnya
+	if user.OldPassword != nil {
+		err = bcrypt.CompareHashAndPassword([]byte(*user.OldPassword), []byte(newPassword))
+		if err == nil {
+			return errors.New("password baru tidak boleh sama dengan password sebelumnya")
+		}
+	}
+
+	// Ganti password
+	err = s.repo.ChangePasswordByReset(
+		user.Username,
+		newPassword,
+		user.Password, // dummy old password
+	)
+	if err != nil {
+		return errors.New("gagal reset password")
+	}
+
+	// Tandai token sudah digunakan
+	err = s.repo.MarkResetTokenUsed(token)
+	if err != nil {
+		return errors.New("gagal update token")
 	}
 
 	return nil

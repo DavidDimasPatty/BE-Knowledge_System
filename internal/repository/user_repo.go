@@ -17,6 +17,12 @@ type UserRepository interface {
 	IncrementLoginCount(id int) error
 	ResetLoginCount(id int) error
 	ChangePassword(username string, newPassword string, oldPassword string) error
+	GetByEmail(email string) (*entities.User, error)
+	SaveResetToken(userID int, token string, expiredDate time.Time, addTime time.Time) error
+	GetResetToken(token string) (*entities.PasswordResets, error)
+	MarkResetTokenUsed(token string) error
+	GetById(id int) (*entities.User, error)
+	ChangePasswordByReset(username string, newPassword string, currentHashedPassword string) error
 }
 
 type userRepository struct {
@@ -103,4 +109,99 @@ func (r *userRepository) ChangePassword(username string, newPassword string, old
 	}
 
 	return nil
+}
+
+func (r *userRepository) GetByEmail(email string) (*entities.User, error) {
+	user := entities.User{}
+	query := `
+		SELECT u.*, r.nama AS role_name
+		FROM users u 
+		LEFT JOIN roles r ON u.roles = r.id
+		WHERE email = ? LIMIT 1`
+
+	err := r.db.Get(&user, query, email)
+	if err != nil {
+		return nil, err
+	}
+
+	return &user, nil
+}
+
+func (r *userRepository) SaveResetToken(userID int, token string, expiredDate time.Time, addTime time.Time) error {
+	query := `
+		INSERT INTO passwordresets (user_id, token, expiredDate, addTime, isReset)
+		VALUES (?, ?, ?, ?, 'N')
+	`
+	_, err := r.db.Exec(query, userID, token, expiredDate, addTime)
+	return err
+}
+
+func (r *userRepository) GetResetToken(token string) (*entities.PasswordResets, error) {
+	data := entities.PasswordResets{}
+
+	query := `
+		SELECT *
+		FROM passwordresets
+		WHERE token = ?
+		LIMIT 1
+	`
+
+	err := r.db.Get(&data, query, token)
+	if err != nil {
+		return nil, err
+	}
+
+	return &data, nil
+}
+
+func (r *userRepository) MarkResetTokenUsed(token string) error {
+	query := `
+		UPDATE passwordresets
+		SET isReset = 'Y'
+		WHERE token = ?
+	`
+
+	_, err := r.db.Exec(query, token)
+	return err
+}
+
+func (r *userRepository) GetById(id int) (*entities.User, error) {
+	user := entities.User{}
+	query := `
+		SELECT u.*, r.nama AS role_name
+		FROM users u 
+		LEFT JOIN roles r ON u.roles = r.id
+		WHERE u.id = ? LIMIT 1`
+
+	err := r.db.Get(&user, query, id)
+	if err != nil {
+		return nil, err
+	}
+
+	return &user, nil
+}
+
+func (r *userRepository) ChangePasswordByReset(username string, newPassword string, currentHashedPassword string) error {
+	hashedNew, err := bcrypt.GenerateFromPassword([]byte(newPassword), bcrypt.DefaultCost)
+	if err != nil {
+		return err
+	}
+
+	query := `
+		UPDATE users
+		SET 
+			oldPassword = ?,
+			password = ?,
+			passwordExpired = DATE_ADD(NOW(), INTERVAL 3 MONTH)
+		WHERE username = ?
+	`
+
+	_, err = r.db.Exec(
+		query,
+		currentHashedPassword,
+		string(hashedNew),
+		username,
+	)
+
+	return err
 }

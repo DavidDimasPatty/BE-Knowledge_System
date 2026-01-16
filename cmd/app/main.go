@@ -31,9 +31,12 @@ func main() {
 		log.Fatal("Cannot connect DB:", err)
 	}
 
+	// Email Service
+	emailService := usecases.NewEmailService(cfg)
+
 	//Auth Handler
 	userRepo := repository.NewUserRepository(db)
-	userService := usecases.NewUserService(userRepo)
+	userService := usecases.NewUserService(userRepo, cfg, emailService)
 	authHandler := handler.NewAuthHandler(userService)
 	//User Management Handler
 	userManagementRepo := repository.NewUserManagementRepository(db)
