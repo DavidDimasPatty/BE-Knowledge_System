@@ -7,6 +7,8 @@ import (
 	"errors"
 	"fmt"
 	"math/big"
+	"os"
+	"strconv"
 
 	"github.com/jmoiron/sqlx"
 	"golang.org/x/crypto/bcrypt"
@@ -175,7 +177,7 @@ func (r *userManagementRepository) ChangeStatusUser(data dto.UserManagement_Chan
 func sendEmail(to, username, password string) error {
 	m := gomail.NewMessage()
 
-	m.SetHeader("From", "ikodora.official@gmail.com")
+	m.SetHeader("From", os.Getenv("SMTP_FROM"))
 	m.SetHeader("To", to)
 	m.SetHeader("Subject", "Your Account Information")
 
@@ -186,8 +188,15 @@ func sendEmail(to, username, password string) error {
 	)
 
 	m.SetBody("text/plain", body)
+	port, err := strconv.Atoi(os.Getenv("SMTP_PORT"))
+	if err != nil {
+		return err
+	}
 
-	d := gomail.NewDialer("smtp.gmail.com", 587, "ikodora.official@gmail.com", "itsjprcgtuhrfsdf")
+	d := gomail.NewDialer(os.Getenv("SMTP_HOST"),
+		port,
+		os.Getenv("SMTP_USER"),
+		os.Getenv("SMTP_PASS"))
 
 	return d.DialAndSend(m)
 }
