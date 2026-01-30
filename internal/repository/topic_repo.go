@@ -57,10 +57,11 @@ func (r *topicRepository) GetAllTopicUser(username string, isFavorite *bool, sea
 
 	baseQuery := `
         SELECT 
-            t.* 
+            t.*,b.category 
         FROM topic t 
         LEFT JOIN usertopicfavorite uf 
             ON uf.idTopic = t.id 
+		JOIN categories b on t.idCategories=b.id 
         WHERE t.addId = ?
     `
 	params := []interface{}{username}

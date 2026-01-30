@@ -2,10 +2,10 @@ package handler
 
 import (
 	"bufio"
+	"bytes"
 	"encoding/json"
+	"io"
 	"net/http"
-	"net/url"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
@@ -25,13 +25,17 @@ func NewWebSocketHandler(manager *WebSocketManager) *WebSocketHandler {
 	return &WebSocketHandler{manager: manager}
 }
 
+type ClientMessage struct {
+	Text       string `json:"text"`
+	IsFirst    bool   `json:"isFirst"`
+	IdCategory int    `json:"idCategory"`
+	Topic      int    `json:"topic"`
+}
+
 func (h *WebSocketHandler) Handle(c *gin.Context) {
 	userId := c.Query("userId")
-	// idCategory := c.Query("idCategory")
-	// topic := c.Query("topic")
 	username := c.Query("username")
 	role := c.Query("roleName")
-	// isFirst := c.Query("isFirst")
 
 	if userId == "" {
 		c.JSON(400, gin.H{"error": "userId is required"})
@@ -46,19 +50,6 @@ func (h *WebSocketHandler) Handle(c *gin.Context) {
 
 	h.manager.AddClient(userId, conn)
 	defer h.manager.RemoveClient(userId)
-	type AIResponse struct {
-		Answer   string `json:"answer"`
-		Topic    int    `json:"topic_id"`
-		Category int    `json:"category_id"`
-		Error    string `json:"error,omitempty"`
-	}
-
-	type ClientMessage struct {
-		Text       string `json:"text"`
-		IsFirst    bool   `json:"isFirst"`
-		IdCategory int    `json:"idCategory"`
-		Topic      int    `json:"topic"`
-	}
 
 	for {
 		_, msg, err := conn.ReadMessage()
@@ -68,73 +59,101 @@ func (h *WebSocketHandler) Handle(c *gin.Context) {
 
 		var clientMsg ClientMessage
 		if err := json.Unmarshal(msg, &clientMsg); err != nil {
-			h.manager.SendToUser(userId, `{"error":"invalid message format"}`)
+			h.manager.SendToUser(userId, `{"type":"error","message":"invalid message format"}`)
 			continue
 		}
 
-		prompt := url.QueryEscape(clientMsg.Text)
-		isFirst := clientMsg.IsFirst
-		idCategory := clientMsg.IdCategory
-		topic := clientMsg.Topic
-		//username := clientMsg.Username
-		//prompt := url.QueryEscape(string(msg))
-		resp, err := http.Get(
-			"http://localhost:9090/ask?question=" + prompt +
-				"&idCategory=" + strconv.Itoa(idCategory) +
-				"&topic=" + strconv.Itoa(topic) + "&role=" + role +
-				"&username=" + username + "&isFirst=" + strconv.FormatBool(isFirst),
-		)
+		// 🔥 STREAM PER MESSAGE
+		go h.handleStream(userId, username, role, clientMsg)
+	}
+}
 
+func (h *WebSocketHandler) handleStream(
+	userId string,
+	username string,
+	role string,
+	clientMsg ClientMessage,
+) {
+
+	payload := map[string]interface{}{
+		"question":   clientMsg.Text,
+		"isFirst":    clientMsg.IsFirst,
+		"idCategory": clientMsg.IdCategory,
+		"topic":      clientMsg.Topic,
+		"username":   username,
+		"role":       role,
+	}
+
+	body, err := json.Marshal(payload)
+	if err != nil {
+		return
+	}
+
+	req, err := http.NewRequest(
+		"POST",
+		"http://localhost:9090/ask3/stream",
+		bytes.NewBuffer(body),
+	)
+	if err != nil {
+		return
+	}
+
+	req.Header.Set("Content-Type", "application/json")
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		h.manager.SendToUser(userId, `{"type":"error","message":"python service error"}`)
+		return
+	}
+	defer resp.Body.Close()
+
+	reader := bufio.NewReader(resp.Body)
+
+	for {
+		line, err := reader.ReadBytes('\n')
+
+		if err == io.EOF {
+			break // stream normal selesai
+		}
 		if err != nil {
-			h.manager.SendToUser(userId, "Internal error")
+			return
+		}
+
+		line = bytes.TrimSpace(line)
+		if len(line) == 0 {
 			continue
 		}
 
-		// func() {
-		// 	defer resp.Body.Close()
+		var data map[string]interface{}
+		if err := json.Unmarshal(line, &data); err != nil {
+			continue
+		}
 
-		// 	var aiResp AIResponse
-		// 	if err := json.NewDecoder(resp.Body).Decode(&aiResp); err != nil {
-		// 		h.manager.SendToUser(userId, `{"error":"invalid AI response"}`)
-		// 		return
-		// 	}
+		switch data["type"] {
 
-		// 	// if aiResp.Topic != "" {
-		// 	// 	topic = aiResp.Topic
-		// 	// }
-		// 	// if aiResp.Category != "" {
-		// 	// 	idCategory = aiResp.Category
-		// 	// }
+		case "token":
+			payload, _ := json.Marshal(map[string]interface{}{
+				"type":    "chunk",
+				"content": data["data"],
+			})
+			h.manager.SendToUser(userId, string(payload))
 
-		// 	payload, err := json.Marshal(aiResp)
-		// 	if err != nil {
-		// 		h.manager.SendToUser(userId, `{"error":"encode failed"}`)
-		// 		return
-		// 	}
+		case "end":
+			payload, _ := json.Marshal(map[string]interface{}{
+				"type":        "done",
+				"topic_id":    data["topic"],
+				"category_id": data["category"],
+			})
+			h.manager.SendToUser(userId, string(payload))
+			return
 
-		// 	h.manager.SendToUser(userId, string(payload))
-		// }()
-		func() {
-			defer resp.Body.Close()
-
-			reader := bufio.NewReader(resp.Body)
-
-			for {
-				line, err := reader.ReadBytes('\n')
-				if err != nil {
-					// stream selesai
-					break
-				}
-
-				// validasi JSON
-				var chunk map[string]interface{}
-				if err := json.Unmarshal(line, &chunk); err != nil {
-					continue
-				}
-
-				// forward ke client (React)
-				h.manager.SendToUser(userId, string(line))
-			}
-		}()
+		case "error":
+			payload, _ := json.Marshal(map[string]interface{}{
+				"type":    "error",
+				"message": data["message"],
+			})
+			h.manager.SendToUser(userId, string(payload))
+			return
+		}
 	}
 }

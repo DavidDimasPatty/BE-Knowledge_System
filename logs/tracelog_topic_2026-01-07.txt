@@ -1,0 +1,606 @@
+2026-01-07 19:42:31 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 19:42:31 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 19:42:31 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 19:42:31 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 19:43:14 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 19:43:14 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 19:43:49 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 19:43:49 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 19:43:49 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 19:43:49 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 19:43:49 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 19:43:49 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 19:43:49 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 19:43:49 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 19:44:27 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 19:44:27 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 19:44:27 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 19:44:27 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 19:44:28 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 19:44:28 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 19:44:28 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 19:44:28 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 19:44:47 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 19:44:47 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 19:44:47 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 19:44:47 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 19:44:50 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 19:44:50 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 19:44:50 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 19:44:50 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 20:52:40 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 20:52:40 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 20:52:40 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 20:52:40 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 20:52:40 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 20:52:40 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 20:52:40 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 20:52:40 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:04:37 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:04:37 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:04:38 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:04:38 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:04:38 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:04:38 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:04:38 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:04:38 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:07:56 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:07:56 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:07:56 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:07:56 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:07:56 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:07:56 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:07:56 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:07:56 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:11:38 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:11:38 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:11:38 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:11:38 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:11:38 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:11:39 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:11:39 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:11:39 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:11:44 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:11:44 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:11:44 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:11:44 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:11:44 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:11:44 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:11:44 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:11:44 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:13:20 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:13:20 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:13:20 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:13:20 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:13:20 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:13:20 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:13:20 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:13:20 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:14:29 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:14:29 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:14:29 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:14:29 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:14:30 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:14:30 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:14:30 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:14:30 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:14:44 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:14:44 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:14:44 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:14:44 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:14:45 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:14:45 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:14:45 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:14:45 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:15:38 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:15:38 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:15:38 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:15:38 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:15:41 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:15:41 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:15:41 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:15:41 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:16:08 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:16:08 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:16:08 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:16:08 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:16:30 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:16:30 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:16:51 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:16:51 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:16:51 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:16:51 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:16:51 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:16:51 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:17:22 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:17:22 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:17:22 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:17:22 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:17:34 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:17:34 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:17:34 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:17:34 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:19:20 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:19:20 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:19:20 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:19:20 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:19:24 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:19:24 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:19:24 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:19:24 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:21:45 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:21:45 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:21:45 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:21:48 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:21:55 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:21:55 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:21:55 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:21:55 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:27:54 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:27:54 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:27:54 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:27:54 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:27:56 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:28:04 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:28:04 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:28:04 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:31:01 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:31:01 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:31:01 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:31:01 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:31:25 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:31:25 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:31:25 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:31:25 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:31:25 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:31:25 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:31:26 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:31:26 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:31:26 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:31:26 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:31:26 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:31:26 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:35:32 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:35:32 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:35:32 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:35:32 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:35:37 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:35:37 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:35:37 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:35:37 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:37:18 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:37:18 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:37:40 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:37:40 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:37:40 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:37:40 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:38:05 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:38:05 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:38:05 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:38:05 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:38:05 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:38:05 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:38:06 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:38:06 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:38:06 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:38:06 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:38:06 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:38:06 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:39:38 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:39:38 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:39:38 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:39:38 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:39:39 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:39:39 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:39:39 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:39:39 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:39:42 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:39:42 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:39:42 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:39:42 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:39:43 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:39:43 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:39:43 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:39:43 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:41:28 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:41:28 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:41:28 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:41:28 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:41:28 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:41:28 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:41:28 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:41:28 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:43:47 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:43:47 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:43:47 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:43:47 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:43:47 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:43:47 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:43:47 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:43:47 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:47:50 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:47:50 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:47:50 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:47:50 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:47:51 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:47:51 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:47:51 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:47:51 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:49:29 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:49:29 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:49:29 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:49:29 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:49:29 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:49:29 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:49:29 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:49:29 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:51:06 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:51:06 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:51:06 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:51:06 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:51:07 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:51:07 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 21:51:07 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 21:51:07 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:09:33 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:09:33 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:09:33 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:09:33 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:09:34 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:09:34 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:09:34 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:09:34 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:10:28 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:10:28 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:10:28 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:10:28 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:10:30 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:10:30 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:10:30 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:10:30 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:10:39 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:10:39 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:10:39 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:10:39 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:10:41 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:10:41 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:10:41 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:10:41 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:14:05 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:14:05 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:14:05 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:14:05 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:14:05 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:14:05 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:14:05 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:14:05 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:15:58 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:15:58 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:15:58 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:15:58 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:15:58 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:15:58 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:15:58 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:15:58 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:20:06 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:20:06 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:20:06 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:20:06 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:20:07 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:20:07 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:20:07 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:20:07 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:07 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:07 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:07 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:07 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:07 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:07 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:07 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:07 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:08 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:08 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:08 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:08 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:08 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:08 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:08 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:09 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:46 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:46 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:46 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:46 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:46 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:46 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:46 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:21:46 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:23:31 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:23:31 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:23:31 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:23:31 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:23:31 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:23:31 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:23:31 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:23:32 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:25:28 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:25:28 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:25:28 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:25:28 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:25:28 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:25:28 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:25:28 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:25:28 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:25:50 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:25:50 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:25:50 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:25:50 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:25:51 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:25:51 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:25:51 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:25:51 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:28:00 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:28:00 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:28:00 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:28:00 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:28:00 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:28:00 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:28:00 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:28:00 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:32:55 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:32:55 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:32:55 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:32:55 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:32:56 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:32:56 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:32:56 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:32:56 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:33:37 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:33:37 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:33:37 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:33:37 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:34:56 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:34:56 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:34:56 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:34:56 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:34:56 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:34:56 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:34:56 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:34:56 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:35:17 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:35:17 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:35:17 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:35:17 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:35:18 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:35:18 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:35:18 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:35:18 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:40:42 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:40:42 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:40:42 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:40:42 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:40:48 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:40:48 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:40:48 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:40:48 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:48:11 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:48:11 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:48:11 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:48:11 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:48:11 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:48:11 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:48:11 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:48:11 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:48:23 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:48:23 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:48:23 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:48:23 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:48:24 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:48:24 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:48:24 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:48:24 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:48:43 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:48:43 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:48:43 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:48:43 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:02 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:02 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:02 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:02 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:02 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:02 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:02 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:02 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:18 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:18 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:18 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:18 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:18 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:19 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:19 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:19 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:43 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:43 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:43 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:43 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:43 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:43 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:43 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:49:43 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:59:31 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:59:31 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:59:31 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:59:31 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:59:31 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:59:31 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 22:59:31 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 22:59:31 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:12:08 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:12:08 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:12:09 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:12:09 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:12:09 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:12:09 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:12:09 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:12:09 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:12:28 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:12:28 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:12:28 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:12:28 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:12:28 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:12:28 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:12:28 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:12:28 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:15:54 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:15:54 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:15:55 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:15:55 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:15:55 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:15:55 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:15:55 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:15:55 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:21:15 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:21:15 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:21:15 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:21:15 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:21:15 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:21:15 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:21:15 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:21:15 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:22:07 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:22:07 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:22:07 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:22:07 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:22:07 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:22:07 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:22:07 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:22:07 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:22:28 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:22:28 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:22:28 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:22:28 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:23:09 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:23:09 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:23:09 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:23:09 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:23:09 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:23:09 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:23:09 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:23:09 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:24:51 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:24:51 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:24:51 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:24:51 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:24:51 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:24:51 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:24:51 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:24:51 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:25:18 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:25:18 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:25:18 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:25:18 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:25:18 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:25:18 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:25:18 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:25:18 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:27:05 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:27:05 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:27:05 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:27:05 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:32:50 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:32:50 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:32:50 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:32:50 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:32:50 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:32:50 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:32:50 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:32:50 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:33:04 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:33:04 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:33:13 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:33:13 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:33:13 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:33:13 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:33:13 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:33:13 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:33:13 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:33:13 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:33:24 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:33:24 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:33:24 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:33:24 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:33:25 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:33:25 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:33:25 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:33:25 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:34:09 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:34:09 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:34:09 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:34:09 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:34:09 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:34:09 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:34:09 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:34:09 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:37:27 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:37:27 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:37:27 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:37:27 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:37:28 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:37:28 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:37:28 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:37:28 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:37:32 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:37:32 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:37:32 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:37:32 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:37:33 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:37:33 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:37:33 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:37:33 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:46:44 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:46:44 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:46:44 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:46:44 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:46:44 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:46:44 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:46:44 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:46:44 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:46:56 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:46:56 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:46:56 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:46:56 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:46:56 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:46:56 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:46:56 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:46:56 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:49:41 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:49:41 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:49:41 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:49:41 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:50:47 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:50:47 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:50:47 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:50:47 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:50:47 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:50:47 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:50:47 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:50:47 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:51:28 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:51:28 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:51:28 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:51:28 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:52:11 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:52:11 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:52:11 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:52:11 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:57:05 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:57:05 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:57:05 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:57:05 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:57:05 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:57:05 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:57:05 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:57:05 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:57:31 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:57:32 --- Mulai proses GetAllTopicUser --- Endpoint: GetAllTopicUser
+2026-01-07 23:57:32 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser
+2026-01-07 23:57:32 --- GetAllTopicUser berhasil --- Endpoint: GetAllTopicUser

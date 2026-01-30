@@ -1,0 +1,2 @@
+2026-01-15 11:17:05 --- Mulai proses GetAllCategoryUser --- Endpoint: GetAllCategoryUser
+2026-01-15 11:17:05 --- GetAllCategoryUser berhasil --- Endpoint: GetAllCategoryUser

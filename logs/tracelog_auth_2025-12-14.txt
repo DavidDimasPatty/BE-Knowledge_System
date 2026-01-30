@@ -1,0 +1,22 @@
+2025-12-14 12:24:58 --- Mulai proses Login --- Endpoint: Login
+2025-12-14 12:24:58 --- Login berhasil --- Endpoint: Login
+2025-12-14 13:02:17 --- Mulai proses Login --- Endpoint: Login
+2025-12-14 13:02:17 --- Login gagal: password salah --- Endpoint: Login
+2025-12-14 13:02:24 --- Mulai proses Login --- Endpoint: Login
+2025-12-14 13:02:24 --- Login berhasil --- Endpoint: Login
+2025-12-14 17:47:38 --- Mulai proses Login --- Endpoint: Login
+2025-12-14 17:47:38 --- Login berhasil --- Endpoint: Login
+2025-12-14 17:51:33 --- Mulai proses Login --- Endpoint: Login
+2025-12-14 17:51:33 --- Login berhasil --- Endpoint: Login
+2025-12-14 17:58:39 --- Mulai proses Login --- Endpoint: Login
+2025-12-14 17:58:39 --- Login berhasil --- Endpoint: Login
+2025-12-14 17:58:54 --- Mulai proses Login --- Endpoint: Login
+2025-12-14 17:58:54 --- Login berhasil --- Endpoint: Login
+2025-12-14 18:34:20 --- Mulai proses Login --- Endpoint: Login
+2025-12-14 18:34:20 --- Login berhasil --- Endpoint: Login
+2025-12-14 18:42:46 --- Mulai proses Login --- Endpoint: Login
+2025-12-14 18:42:46 --- Login berhasil --- Endpoint: Login
+2025-12-14 23:20:39 --- Mulai proses Login --- Endpoint: Login
+2025-12-14 23:20:39 --- Login berhasil --- Endpoint: Login
+2025-12-14 23:54:14 --- Mulai proses Login --- Endpoint: Login
+2025-12-14 23:54:14 --- Login berhasil --- Endpoint: Login
