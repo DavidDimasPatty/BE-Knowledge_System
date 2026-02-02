@@ -131,8 +131,8 @@ func (s *userService) EditPassword(username string, newPassword string, oldPassw
 func (s *userService) SendEmailResetPassword(email string) error {
 	user, err := s.repo.GetByEmail(email)
 	if err != nil {
-		// return errors.New("email tidak ditemukan")
-		return nil
+		return errors.New("")
+		// return nil
 	}
 
 	// Cek apakah user sudah diblock
