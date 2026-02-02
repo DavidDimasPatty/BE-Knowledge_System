@@ -3,18 +3,18 @@ package handler
 import (
 	"bufio"
 	"bytes"
+	"context"
 	"encoding/json"
 	"io"
 	"net/http"
+	"sync"
 
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 )
 
 var upgrader = websocket.Upgrader{
-	CheckOrigin: func(r *http.Request) bool {
-		return true
-	},
+	CheckOrigin: func(r *http.Request) bool { return true },
 }
 
 type WebSocketHandler struct {
@@ -25,12 +25,31 @@ func NewWebSocketHandler(manager *WebSocketManager) *WebSocketHandler {
 	return &WebSocketHandler{manager: manager}
 }
 
+/* =======================
+   STREAM SESSION MANAGER
+======================= */
+
+type StreamSession struct {
+	Cancel context.CancelFunc
+}
+
+var streamSessions sync.Map // userId -> *StreamSession
+
+/* =======================
+   MESSAGE STRUCT
+======================= */
+
 type ClientMessage struct {
+	Type       string `json:"type"` // ask | stop
 	Text       string `json:"text"`
 	IsFirst    bool   `json:"isFirst"`
 	IdCategory int    `json:"idCategory"`
 	Topic      int    `json:"topic"`
 }
+
+/* =======================
+   WS HANDLER
+======================= */
 
 func (h *WebSocketHandler) Handle(c *gin.Context) {
 	userId := c.Query("userId")
@@ -51,6 +70,9 @@ func (h *WebSocketHandler) Handle(c *gin.Context) {
 	h.manager.AddClient(userId, conn)
 	defer h.manager.RemoveClient(userId)
 
+	// kill stream if socket disconnect
+	defer h.stopStream(userId)
+
 	for {
 		_, msg, err := conn.ReadMessage()
 		if err != nil {
@@ -63,12 +85,42 @@ func (h *WebSocketHandler) Handle(c *gin.Context) {
 			continue
 		}
 
-		// 🔥 STREAM PER MESSAGE
-		go h.handleStream(userId, username, role, clientMsg)
+		switch clientMsg.Type {
+
+		// ===== STOP STREAM =====
+		case "stop":
+			h.stopStream(userId)
+
+		// ===== START STREAM =====
+		case "ask":
+			// pastikan hanya 1 stream aktif
+			h.stopStream(userId)
+
+			ctx, cancel := context.WithCancel(context.Background())
+			streamSessions.Store(userId, &StreamSession{Cancel: cancel})
+
+			go h.handleStream(ctx, userId, username, role, clientMsg)
+		}
 	}
 }
 
+/* =======================
+   STOP STREAM (CENTRAL)
+======================= */
+
+func (h *WebSocketHandler) stopStream(userId string) {
+	if v, ok := streamSessions.Load(userId); ok {
+		v.(*StreamSession).Cancel()
+		streamSessions.Delete(userId)
+	}
+}
+
+/* =======================
+   STREAM TO PYTHON
+======================= */
+
 func (h *WebSocketHandler) handleStream(
+	ctx context.Context,
 	userId string,
 	username string,
 	role string,
@@ -89,9 +141,11 @@ func (h *WebSocketHandler) handleStream(
 		return
 	}
 
-	req, err := http.NewRequest(
+	req, err := http.NewRequestWithContext(
+		ctx,
 		"POST",
-		"http://localhost:9090/ask3/stream",
+		// "http://localhost:9091/ask3/stream",
+		"http://localhost:9091/ask3/test",
 		bytes.NewBuffer(body),
 	)
 	if err != nil {
@@ -110,10 +164,16 @@ func (h *WebSocketHandler) handleStream(
 	reader := bufio.NewReader(resp.Body)
 
 	for {
-		line, err := reader.ReadBytes('\n')
+		select {
+		case <-ctx.Done():
+			// STREAM DIBATALKAN
+			return
+		default:
+		}
 
+		line, err := reader.ReadBytes('\n')
 		if err == io.EOF {
-			break // stream normal selesai
+			return
 		}
 		if err != nil {
 			return
@@ -145,6 +205,7 @@ func (h *WebSocketHandler) handleStream(
 				"category_id": data["category"],
 			})
 			h.manager.SendToUser(userId, string(payload))
+			h.stopStream(userId)
 			return
 
 		case "error":
@@ -153,6 +214,7 @@ func (h *WebSocketHandler) handleStream(
 				"message": data["message"],
 			})
 			h.manager.SendToUser(userId, string(payload))
+			h.stopStream(userId)
 			return
 		}
 	}
