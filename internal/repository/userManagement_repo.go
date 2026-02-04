@@ -37,7 +37,7 @@ func (r *userManagementRepository) GetAllUser() (*dto.UserManagement_GetAllUser_
 
 	users := []entities.User{}
 
-	query := "SELECT * FROM users"
+	query := "SELECT u.*, r.nama AS `role_name` FROM users u LEFT JOIN roles r ON r.id = u.roles;"
 
 	err := r.db.Select(&users, query)
 	if err != nil {
@@ -51,9 +51,9 @@ func (r *userManagementRepository) GetAllUser() (*dto.UserManagement_GetAllUser_
 
 func (r *userManagementRepository) AddUser(data dto.UserManagement_AddUser_Request) error {
 	var checkUser int
-	querySelect := "SELECT count(*) FROM users WHERE username = ? or email = ? or noTelp = ?"
+	querySelect := "SELECT count(*) FROM users WHERE username = ? or email = ?"
 
-	errSelect := r.db.Get(&checkUser, querySelect, data.Username, data.Email, data.NoTelp)
+	errSelect := r.db.Get(&checkUser, querySelect, data.Username, data.Email)
 	if errSelect != nil {
 		return errSelect
 	}
@@ -79,15 +79,14 @@ func (r *userManagementRepository) AddUser(data dto.UserManagement_AddUser_Reque
 
 	query := `
     INSERT INTO users 
-    (username, PASSWORD, email, noTelp, nama, roles, passwordExpired, addId,divisi, STATUS, addTime)
-    VALUES (?, ?, ?, ?, ?, ?, NOW(), ?,1, "Inactive", NOW())
+    (username, PASSWORD, email, nama, roles, passwordExpired, addId, divisi, STATUS, addTime)
+    VALUES (?, ?, ?, ?, ?, DATE_ADD(NOW(), INTERVAL 30 YEAR), ?, 1, "Inactive", NOW())
 `
 
 	_, err := r.db.Exec(query,
 		data.Username,
 		string(hashedPass),
 		data.Email,
-		data.NoTelp,
 		data.Nama,
 		data.RoleId,
 		data.AddId,
@@ -112,9 +111,9 @@ func (r *userManagementRepository) EditUserGet(id int) (*entities.User, error) {
 
 func (r *userManagementRepository) EditUser(data dto.UserManagement_EditUser_Request) error {
 	var checkUser int
-	querySelect := "SELECT count(*) FROM users WHERE ( email = ? or noTelp = ?) and  id != ?"
+	querySelect := "SELECT count(*) FROM users WHERE ( email = ? ) and  id != ?"
 
-	errSelect := r.db.Get(&checkUser, querySelect, data.Email, data.NoTelp, data.Id)
+	errSelect := r.db.Get(&checkUser, querySelect, data.Email, data.Id)
 	if errSelect != nil {
 		return errSelect
 	}
@@ -125,13 +124,12 @@ func (r *userManagementRepository) EditUser(data dto.UserManagement_EditUser_Req
 
 	query := `
 		UPDATE users 
-		SET   email = ?, noTelp = ?, nama = ?, roles = ?, updId = ?, updTime = NOW()
+		SET   email = ?, nama = ?, roles = ?, updId = ?, updTime = NOW()
 		WHERE id = ?
 	`
 
 	_, err := r.db.Exec(query,
 		data.Email,
-		data.NoTelp,
 		data.Nama,
 		data.RoleId,
 		data.UpdId,
