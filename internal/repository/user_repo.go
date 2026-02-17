@@ -116,7 +116,7 @@ func (r *userRepository) ChangePassword(username string, newPassword string, old
 	}
 
 	query := `
-    update users set password=?, oldPassword=?, passwordExpired=DATE_ADD(NOW(), INTERVAL 3 MONTH)
+    update users set password=?, oldPassword=?, passwordExpired=DATE_ADD(NOW(), INTERVAL 30 YEAR)
 	where username=?`
 
 	_, err := r.db.Exec(query,
@@ -213,7 +213,7 @@ func (r *userRepository) ChangePasswordByReset(username string, newPassword stri
 		SET 
 			oldPassword = ?,
 			password = ?,
-			passwordExpired = DATE_ADD(NOW(), INTERVAL 3 MONTH)
+			passwordExpired = DATE_ADD(NOW(), INTERVAL 30 YEAR)
 		WHERE username = ?
 	`
 

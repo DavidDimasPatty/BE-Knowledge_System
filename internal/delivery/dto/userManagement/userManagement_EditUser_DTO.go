@@ -5,6 +5,6 @@ type UserManagement_EditUser_Request struct {
 	Nama   string `json:"nama"`
 	RoleId int    `json:"roleId"`
 	Email  string `json:"email"`
-	NoTelp string `json:"noTelp"`
 	UpdId  string `json:"updId"`
+	// NoTelp string `json:"noTelp"`
 }
