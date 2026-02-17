@@ -59,6 +59,8 @@ func registerAuthRoutes(r *gin.Engine, authHandler *handler.AuthHandler) {
 	r.POST("/sendEmailResetPassword", authHandler.SendEmailResetPassword)
 	r.GET("/validateResetToken", authHandler.ValidateResetToken)
 	r.POST("/resetPassword", authHandler.ResetPassword)
+	r.GET("/authCheck", authHandler.AuthChecker)
+	r.GET("/logout", authHandler.LogOut)
 }
 
 // UserManagement Router

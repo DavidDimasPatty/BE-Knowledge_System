@@ -23,7 +23,6 @@ func (h *CategoryHandler) GetAllCategoryUser(c *gin.Context) {
 
 	var req dto.Category_GetAllCategoryUser_Request
 
-	// Bind query param ke struct
 	if err := c.ShouldBindQuery(&req); err != nil {
 		Tracelog.CategoryLog("Request tidak valid: "+err.Error(), namaEndpoint)
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})

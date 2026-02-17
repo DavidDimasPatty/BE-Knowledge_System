@@ -61,10 +61,10 @@ func (r *dokumenManagementRepository) AddDokumen(data *dto.DokumenManagement_Add
 	}
 
 	jsonData, _ := json.Marshal(payload)
-
+	baseURL := os.Getenv("URL_PYTHON")
 	req, err := http.NewRequest(
 		"POST",
-		"http://localhost:9090/insertDocument",
+		baseURL+"/insertDocument",
 		bytes.NewBuffer(jsonData),
 	)
 	if err != nil {
@@ -121,10 +121,10 @@ func (r *dokumenManagementRepository) EditDokumen(data *dto.DokumenManagement_Ed
 		if err != nil {
 			return err
 		}
-
+		baseURL := os.Getenv("URL_PYTHON")
 		req, err := http.NewRequest(
 			"POST",
-			"http://localhost:9090/editDocument",
+			baseURL+"/editDocument",
 			bytes.NewBuffer(jsonData),
 		)
 		if err != nil {
@@ -189,9 +189,10 @@ func (r *dokumenManagementRepository) DeleteDokumen(id int) error {
 
 	jsonData, _ := json.Marshal(payload)
 
+	baseURL := os.Getenv("URL_PYTHON")
 	req, err := http.NewRequest(
 		"POST",
-		"http://localhost:9090/deleteDocument",
+		baseURL+"/deleteDocument",
 		bytes.NewBuffer(jsonData),
 	)
 	if err != nil {

@@ -2,6 +2,7 @@ package handler
 
 import (
 	dto "be-knowledge/internal/delivery/dto/dokumenManagement"
+	Tracelog "be-knowledge/internal/tracelog"
 	"be-knowledge/internal/usecases"
 	"fmt"
 	"net/http"
@@ -21,13 +22,15 @@ func NewDokumenManagementHandler(dokumenManagementService usecases.DokumenManage
 }
 
 func (h *DokumenManagementHandler) GetAllDokumen(c *gin.Context) {
-
+	namaEndpoint := "GetAllDokumen"
+	Tracelog.DokumenManagementLog("Mulai proses ", namaEndpoint)
 	dokumen, err := h.dokumenManagementService.GetAllDokumen()
 	if err != nil {
+		Tracelog.DokumenManagementLog(fmt.Sprintf("Gagal  : %v", err), namaEndpoint)
 		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 		return
 	}
-
+	Tracelog.DokumenManagementLog("Success ", namaEndpoint)
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Success",
 		"dokumen": gin.H{
@@ -37,24 +40,29 @@ func (h *DokumenManagementHandler) GetAllDokumen(c *gin.Context) {
 }
 
 func (h *DokumenManagementHandler) EditDokumenGet(c *gin.Context) {
+	namaEndpoint := "EditDokumenGet"
+	Tracelog.DokumenManagementLog("Mulai proses", namaEndpoint)
 	idStr := c.Query("id")
 	if idStr == "" {
+		Tracelog.DokumenManagementLog("Gagal : id is required", namaEndpoint)
 		c.JSON(http.StatusBadRequest, gin.H{"error": "id is required"})
 		return
 	}
 
 	id, err := strconv.Atoi(idStr)
 	if err != nil {
+		Tracelog.DokumenManagementLog("Gagal :id must be a number", namaEndpoint)
 		c.JSON(http.StatusBadRequest, gin.H{"error": "id must be a number"})
 		return
 	}
 
 	dokumen, err := h.dokumenManagementService.EditDokumenGet(id)
 	if err != nil {
+		Tracelog.DokumenManagementLog(fmt.Sprintf("Gagal : %v", err), namaEndpoint)
 		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 		return
 	}
-
+	Tracelog.DokumenManagementLog("Success ", namaEndpoint)
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Success",
 		"data":    dokumen,
@@ -62,17 +70,21 @@ func (h *DokumenManagementHandler) EditDokumenGet(c *gin.Context) {
 }
 
 func (h *DokumenManagementHandler) AddDokumen(c *gin.Context) {
+	namaEndpoint := "AddDokumen"
+	Tracelog.DokumenManagementLog("Mulai proses", namaEndpoint)
 	judul := c.PostForm("judul")
 	addId := c.PostForm("addId")
 
 	file, err := c.FormFile("file")
 	if err != nil {
+		Tracelog.DokumenManagementLog("Gagal : file is required", namaEndpoint)
 		c.JSON(http.StatusBadRequest, gin.H{"error": "file is required"})
 		return
 	}
 
 	f, err := file.Open()
 	if err != nil {
+		Tracelog.DokumenManagementLog("Gagal : cannot open file", namaEndpoint)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "cannot open file"})
 		return
 	}
@@ -81,6 +93,7 @@ func (h *DokumenManagementHandler) AddDokumen(c *gin.Context) {
 	fileData := make([]byte, file.Size)
 	_, err = f.Read(fileData)
 	if err != nil {
+		Tracelog.DokumenManagementLog("Gagal : cannot read file", namaEndpoint)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "cannot read file"})
 		return
 	}
@@ -94,10 +107,12 @@ func (h *DokumenManagementHandler) AddDokumen(c *gin.Context) {
 
 	err = h.dokumenManagementService.AddDokumen(req)
 	if err != nil {
+		Tracelog.DokumenManagementLog(fmt.Sprintf("Gagal : %v", err), namaEndpoint)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 
+	Tracelog.DokumenManagementLog("Success ", namaEndpoint)
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Success",
 		"data":    nil,
@@ -105,11 +120,14 @@ func (h *DokumenManagementHandler) AddDokumen(c *gin.Context) {
 }
 
 func (h *DokumenManagementHandler) EditDokumen(c *gin.Context) {
+	namaEndpoint := "EditDokumen"
+	Tracelog.DokumenManagementLog("Mulai proses", namaEndpoint)
 	judul := c.PostForm("judul")
 	updId := c.PostForm("updId")
 	id := c.PostForm("id")
 	intID, err := strconv.Atoi(id)
 	if err != nil {
+		Tracelog.DokumenManagementLog("Gagal : Id Not Valid", namaEndpoint)
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Id Not Valid"})
 		return
 	}

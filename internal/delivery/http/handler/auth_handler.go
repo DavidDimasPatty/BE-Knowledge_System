@@ -5,8 +5,11 @@ import (
 	Tracelog "be-knowledge/internal/tracelog"
 	"be-knowledge/internal/usecases"
 	"net/http"
+	"os"
+	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt/v5"
 )
 
 type AuthHandler struct {
@@ -16,6 +19,8 @@ type AuthHandler struct {
 func NewAuthHandler(userService usecases.UserService) *AuthHandler {
 	return &AuthHandler{userService}
 }
+
+var jwtSecret = []byte(os.Getenv("JWT_SECRET"))
 
 func (h *AuthHandler) Login(c *gin.Context) {
 	var namaEndpoint = "Login"
@@ -39,6 +44,7 @@ func (h *AuthHandler) Login(c *gin.Context) {
 
 	Tracelog.AuthLog("Login berhasil", namaEndpoint)
 
+	setTokenCookie(c, user.ID)
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Success",
 		"user": gin.H{
@@ -159,4 +165,98 @@ func (h *AuthHandler) ResetPassword(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Success",
 	})
+}
+
+func (h *AuthHandler) AuthChecker(c *gin.Context) {
+	var namaEndpoint = "AuthChecker"
+
+	Tracelog.AuthLog("Mulai proses AuthChecker", namaEndpoint)
+
+	tokenString, err := c.Cookie("access_token")
+	if err != nil {
+		c.AbortWithStatus(401)
+		return
+	}
+
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		return jwtSecret, nil
+	})
+
+	if err != nil || !token.Valid {
+		c.AbortWithStatus(401)
+		return
+	}
+
+	claims, ok := token.Claims.(jwt.MapClaims)
+	if !ok {
+		c.AbortWithStatus(401)
+		return
+	}
+
+	userIDFloat, ok := claims["user_id"].(float64)
+	if !ok {
+		c.AbortWithStatus(401)
+		return
+	}
+
+	userID := int(userIDFloat)
+
+	err = h.userService.AuthUser(userID)
+
+	if err != nil {
+		c.AbortWithStatus(401)
+		return
+	}
+
+	setTokenCookie(c, userID)
+
+	c.JSON(200, gin.H{
+		"message": "session refreshed",
+	})
+}
+
+func (h *AuthHandler) LogOut(c *gin.Context) {
+	c.SetSameSite(http.SameSiteLaxMode)
+
+	c.SetCookie(
+		"access_token",
+		"",
+		-1,
+		"/",
+		"",
+		false, // true kalau HTTPS
+		true,  // httpOnly
+	)
+
+	c.JSON(200, gin.H{
+		"message": "Success",
+	})
+}
+
+func setTokenCookie(c *gin.Context, userID int) {
+
+	expiration := 15 * time.Minute
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"user_id": userID,
+		"exp":     time.Now().Add(expiration).Unix(),
+	})
+
+	tokenString, err := token.SignedString(jwtSecret)
+	if err != nil {
+		c.AbortWithStatus(500)
+		return
+	}
+
+	c.SetSameSite(http.SameSiteLaxMode)
+
+	c.SetCookie(
+		"access_token",
+		tokenString,
+		int(expiration.Seconds()),
+		"/",
+		"",
+		false,
+		true,
+	)
 }

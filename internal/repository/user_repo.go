@@ -2,6 +2,7 @@ package repository
 
 import (
 	"be-knowledge/internal/entities"
+	"errors"
 
 	"github.com/jmoiron/sqlx"
 
@@ -12,6 +13,7 @@ import (
 
 type UserRepository interface {
 	GetByUsername(username string) (*entities.User, error)
+	GetByUserId(id int) error
 	UpdateLastLogin(id int, lastLogin time.Time) error
 	BlockUser(id int, blockDate time.Time) error
 	IncrementLoginCount(id int) error
@@ -47,6 +49,25 @@ func (r *userRepository) GetByUsername(username string) (*entities.User, error) 
 	}
 
 	return &user, nil
+}
+
+func (r *userRepository) GetByUserId(id int) error {
+	var count int
+	query := `
+		SELECT count(*)
+		FROM users
+		WHERE id = ? LIMIT 1`
+
+	err := r.db.Get(&count, query, id)
+	if err != nil {
+		return err
+	}
+
+	if count == 0 {
+		return errors.New("user not found")
+	}
+
+	return nil
 }
 
 func (r *userRepository) UpdateLastLogin(id int, lastLogin time.Time) error {

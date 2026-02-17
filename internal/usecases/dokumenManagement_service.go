@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"time"
 
 	"be-knowledge/internal/entities"
 	"be-knowledge/internal/repository"
@@ -42,8 +43,8 @@ func (s *dokumenManagementService) AddDokumen(data *dto.DokumenManagement_AddDok
 	if parentPath == "" {
 		return errors.New("STORAGE_PATH is not set")
 	}
-
-	filePath := filepath.Join(parentPath, data.FileName)
+	now := time.Now().Format("20060102_150405")
+	filePath := filepath.Join(parentPath, now+"_"+data.FileName)
 	if err := ioutil.WriteFile(filePath, data.FileData, 0644); err != nil {
 		return err
 	}
@@ -70,8 +71,8 @@ func (s *dokumenManagementService) EditDokumen(data *dto.DokumenManagement_EditD
 		if parentPath == "" {
 			return errors.New("STORAGE_PATH is not set")
 		}
-
-		fullPath := filepath.Join(parentPath, data.FileName)
+		now := time.Now().Format("20060102_150405")
+		fullPath := filepath.Join(parentPath, now+"_"+data.FileName)
 
 		if err := ioutil.WriteFile(fullPath, data.FileData, 0644); err != nil {
 			return err

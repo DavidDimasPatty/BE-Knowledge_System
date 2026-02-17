@@ -7,6 +7,8 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
+	"os"
+	"strings"
 	"sync"
 
 	"github.com/gin-gonic/gin"
@@ -25,19 +27,11 @@ func NewWebSocketHandler(manager *WebSocketManager) *WebSocketHandler {
 	return &WebSocketHandler{manager: manager}
 }
 
-/* =======================
-   STREAM SESSION MANAGER
-======================= */
-
 type StreamSession struct {
 	Cancel context.CancelFunc
 }
 
 var streamSessions sync.Map // userId -> *StreamSession
-
-/* =======================
-   MESSAGE STRUCT
-======================= */
 
 type ClientMessage struct {
 	Type       string `json:"type"` // ask | stop
@@ -45,11 +39,8 @@ type ClientMessage struct {
 	IsFirst    bool   `json:"isFirst"`
 	IdCategory int    `json:"idCategory"`
 	Topic      int    `json:"topic"`
+	Level      string `json:"level"`
 }
-
-/* =======================
-   WS HANDLER
-======================= */
 
 func (h *WebSocketHandler) Handle(c *gin.Context) {
 	userId := c.Query("userId")
@@ -70,7 +61,6 @@ func (h *WebSocketHandler) Handle(c *gin.Context) {
 	h.manager.AddClient(userId, conn)
 	defer h.manager.RemoveClient(userId)
 
-	// kill stream if socket disconnect
 	defer h.stopStream(userId)
 
 	for {
@@ -87,13 +77,10 @@ func (h *WebSocketHandler) Handle(c *gin.Context) {
 
 		switch clientMsg.Type {
 
-		// ===== STOP STREAM =====
 		case "stop":
 			h.stopStream(userId)
 
-		// ===== START STREAM =====
 		case "ask":
-			// pastikan hanya 1 stream aktif
 			h.stopStream(userId)
 
 			ctx, cancel := context.WithCancel(context.Background())
@@ -104,20 +91,12 @@ func (h *WebSocketHandler) Handle(c *gin.Context) {
 	}
 }
 
-/* =======================
-   STOP STREAM (CENTRAL)
-======================= */
-
 func (h *WebSocketHandler) stopStream(userId string) {
 	if v, ok := streamSessions.Load(userId); ok {
 		v.(*StreamSession).Cancel()
 		streamSessions.Delete(userId)
 	}
 }
-
-/* =======================
-   STREAM TO PYTHON
-======================= */
 
 func (h *WebSocketHandler) handleStream(
 	ctx context.Context,
@@ -126,7 +105,7 @@ func (h *WebSocketHandler) handleStream(
 	role string,
 	clientMsg ClientMessage,
 ) {
-
+	print(clientMsg.Level)
 	payload := map[string]interface{}{
 		"question":   clientMsg.Text,
 		"isFirst":    clientMsg.IsFirst,
@@ -134,6 +113,7 @@ func (h *WebSocketHandler) handleStream(
 		"topic":      clientMsg.Topic,
 		"username":   username,
 		"role":       role,
+		"level":      clientMsg.Level,
 	}
 
 	body, err := json.Marshal(payload)
@@ -141,11 +121,12 @@ func (h *WebSocketHandler) handleStream(
 		return
 	}
 
+	var urlPython = os.Getenv("URL_PYTHON")
+
 	req, err := http.NewRequestWithContext(
 		ctx,
 		"POST",
-		// "http://localhost:9091/ask3/stream",
-		"http://localhost:9091/ask3/test",
+		urlPython,
 		bytes.NewBuffer(body),
 	)
 	if err != nil {
@@ -166,7 +147,6 @@ func (h *WebSocketHandler) handleStream(
 	for {
 		select {
 		case <-ctx.Done():
-			// STREAM DIBATALKAN
 			return
 		default:
 		}
@@ -199,12 +179,19 @@ func (h *WebSocketHandler) handleStream(
 			h.manager.SendToUser(userId, string(payload))
 
 		case "end":
-			payload, _ := json.Marshal(map[string]interface{}{
-				"type":        "done",
-				"topic_id":    data["topic"],
-				"category_id": data["category"],
-			})
-			h.manager.SendToUser(userId, string(payload))
+			if !strings.Contains(userId, "guest") {
+				payload, _ := json.Marshal(map[string]interface{}{
+					"type":        "done",
+					"topic_id":    data["topic"],
+					"category_id": data["category"],
+				})
+				h.manager.SendToUser(userId, string(payload))
+			} else {
+				payload, _ := json.Marshal(map[string]interface{}{
+					"type": "done",
+				})
+				h.manager.SendToUser(userId, string(payload))
+			}
 			h.stopStream(userId)
 			return
 

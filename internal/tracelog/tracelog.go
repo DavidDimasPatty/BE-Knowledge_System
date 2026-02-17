@@ -38,6 +38,16 @@ func UserManagementLog(message, endpoint string) {
 	write("tracelog_user_management", message, endpoint)
 }
 
+// Untuk Dokumen Management
+func DokumenManagementLog(message, endpoint string) {
+	write("tracelog_dokumen_management", message, endpoint)
+}
+
+// Untuk General Management
+func HomeLog(message, endpoint string) {
+	write("tracelog_home", message, endpoint)
+}
+
 // Untuk Topic
 func TopicLog(message, endpoint string) {
 	write("tracelog_topic", message, endpoint)
@@ -46,4 +56,9 @@ func TopicLog(message, endpoint string) {
 // Untuk Category
 func CategoryLog(message, endpoint string) {
 	write("tracelog_category", message, endpoint)
+}
+
+// Untuk General Management
+func WebSocketLog(message, endpoint string) {
+	write("tracelog_websocket", message, endpoint)
 }

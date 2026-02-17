@@ -21,6 +21,7 @@ type UserService interface {
 	SendEmailResetPassword(email string) error
 	ValidateResetToken(token string) error
 	ResetPassword(token, newPassword string) error
+	AuthUser(userID int) error
 }
 
 type userService struct {
@@ -262,5 +263,13 @@ func (s *userService) ResetPassword(token string, newPassword string) error {
 		return errors.New("gagal update token")
 	}
 
+	return nil
+}
+
+func (s *userService) AuthUser(userID int) error {
+	err := s.repo.GetByUserId(userID)
+	if err != nil {
+		return errors.New("username tidak ditemukan")
+	}
 	return nil
 }
