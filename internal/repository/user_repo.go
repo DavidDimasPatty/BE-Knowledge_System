@@ -2,7 +2,9 @@ package repository
 
 import (
 	"be-knowledge/internal/entities"
+	Tracelog "be-knowledge/internal/tracelog"
 	"errors"
+	"fmt"
 
 	"github.com/jmoiron/sqlx"
 
@@ -36,6 +38,8 @@ func NewUserRepository(db *sqlx.DB) UserRepository {
 }
 
 func (r *userRepository) GetByUsername(username string) (*entities.User, error) {
+	var namaEndpoint = "Login"
+	Tracelog.UserManagementLog(fmt.Sprintf("Gagal update last login : %v", username), namaEndpoint)
 	user := entities.User{}
 	query := `
 		SELECT u.*, r.nama AS role_name
@@ -44,6 +48,10 @@ func (r *userRepository) GetByUsername(username string) (*entities.User, error) 
 		WHERE username = ? LIMIT 1`
 
 	err := r.db.Get(&user, query, username)
+	Tracelog.UserManagementLog(
+		fmt.Sprintf("SQL: %s | Params: username=%v", query, username),
+		namaEndpoint,
+	)
 	if err != nil {
 		return nil, err
 	}

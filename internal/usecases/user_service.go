@@ -1,12 +1,12 @@
 package usecases
 
 import (
-	"errors"
-	"time"
-
 	"be-knowledge/configs"
 	"be-knowledge/internal/entities"
 	"be-knowledge/internal/repository"
+	Tracelog "be-knowledge/internal/tracelog"
+	"errors"
+	"time"
 
 	"golang.org/x/crypto/bcrypt"
 
@@ -41,17 +41,24 @@ func NewUserService(repo repository.UserRepository, cfg *configs.Config, emailSe
 func (s *userService) Login(username, password string) (*entities.User, error) {
 	now := time.Now()
 
+	var namaEndpoint = "Login"
+
+	Tracelog.AuthLog(fmt.Sprintf("Get Username : %v", username), namaEndpoint)
+
 	user, err := s.repo.GetByUsername(username)
 	if err != nil {
+		Tracelog.UserManagementLog(fmt.Sprintf("Gagal username tidak ditemukan : %v", username), namaEndpoint)
 		return nil, errors.New("username tidak ditemukan")
 	}
 
 	// Cek apakah user sudah diblock
 	if user.Status != nil && *user.Status == "Block" {
+		Tracelog.UserManagementLog(fmt.Sprintf("Gagal akun anda diblok, hubungi admin : %v", username), namaEndpoint)
 		return nil, errors.New("akun anda diblok, hubungi admin")
 	}
 
 	if user.Status != nil && *user.Status == "Inactive" {
+		Tracelog.UserManagementLog(fmt.Sprintf("Gagal akun anda belum aktif, hubungi admin : %v", username), namaEndpoint)
 		return nil, errors.New("akun anda belum aktif, hubungi admin")
 	}
 
@@ -67,6 +74,7 @@ func (s *userService) Login(username, password string) (*entities.User, error) {
 
 		if user.LoginCount >= 5 {
 			_ = s.repo.BlockUser(user.ID, now)
+			Tracelog.UserManagementLog(fmt.Sprintf("Gagal akun anda diblok karena terlalu banyak salah password : %v", username), namaEndpoint)
 			return nil, errors.New("akun anda diblok karena terlalu banyak salah password")
 		}
 
@@ -80,6 +88,7 @@ func (s *userService) Login(username, password string) (*entities.User, error) {
 
 	err = s.repo.UpdateLastLogin(user.ID, now)
 	if err != nil {
+		Tracelog.UserManagementLog(fmt.Sprintf("Gagal update last login : %v", username), namaEndpoint)
 		return nil, errors.New("gagal update last login")
 	}
 
