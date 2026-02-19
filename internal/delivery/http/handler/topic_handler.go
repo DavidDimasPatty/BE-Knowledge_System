@@ -100,19 +100,25 @@ func (h *TopicHandler) GetAllTopicUserByidCategories(c *gin.Context) {
 }
 
 func (h *TopicHandler) EditFavoriteTopic(c *gin.Context) {
+	namaEndpoint := "EditFavoriteTopic"
+	Tracelog.TopicLog("Mulai proses EditFavoriteTopic", namaEndpoint)
+
 	var req *dto.Topic_EditFavoriteTopic_Request
 
 	if err := c.ShouldBindJSON(&req); err != nil {
+		Tracelog.TopicLog("Request tidak valid: "+err.Error(), namaEndpoint)
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid request"})
 		return
 	}
 
 	err := h.topicService.EditFavoriteTopic(req.Username, req.IdTopic, req.Like)
 	if err != nil {
+		Tracelog.TopicLog("EditFavoriteTopic gagal: "+err.Error(), namaEndpoint)
 		c.JSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 		return
 	}
 
+	Tracelog.TopicLog("EditFavoriteTopic berhasil", namaEndpoint)
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Success",
 		"data":    nil,

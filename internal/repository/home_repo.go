@@ -2,6 +2,8 @@ package repository
 
 import (
 	dto "be-knowledge/internal/delivery/dto/home"
+	Tracelog "be-knowledge/internal/tracelog"
+	"fmt"
 
 	"github.com/jmoiron/sqlx"
 )
@@ -22,6 +24,15 @@ func (r *homeRepository) GetHistoryChat(
 	data dto.Home_GetHistoryChat_Request,
 ) (*dto.Home_GetHistoryChat_Response, error) {
 
+	namaEndpoint := "GetHistoryChat"
+	Tracelog.HomeLog("Mulai proses repository GetHistoryChat", namaEndpoint)
+
+	Tracelog.HomeLog(
+		fmt.Sprintf("Parameter -> Username: %s, Category: %v, Topic: %v",
+			data.Username, data.Category, data.Topic),
+		namaEndpoint,
+	)
+
 	rows := []dto.ChatHistoryRow{}
 
 	query := `
@@ -38,14 +49,30 @@ func (r *homeRepository) GetHistoryChat(
 	  AND c.id = ?
 	`
 
+	Tracelog.HomeLog(
+		fmt.Sprintf("Query: %s | Params: [%s, %v, %v]",
+			query,
+			data.Username,
+			data.Category,
+			data.Topic,
+		),
+		namaEndpoint,
+	)
+
 	err := r.db.Select(&rows, query,
 		data.Username,
 		data.Category,
 		data.Topic,
 	)
 	if err != nil {
+		Tracelog.HomeLog("Query gagal: "+err.Error(), namaEndpoint)
 		return nil, err
 	}
+
+	Tracelog.HomeLog(
+		fmt.Sprintf("Berhasil mengambil %d baris history chat", len(rows)),
+		namaEndpoint,
+	)
 
 	resp := dto.Home_GetHistoryChat_Response{
 		User: []dto.ChatHistory{},
@@ -63,6 +90,8 @@ func (r *homeRepository) GetHistoryChat(
 			Role: "bot",
 		})
 	}
+
+	Tracelog.HomeLog("Selesai proses repository GetHistoryChat", namaEndpoint)
 
 	return &resp, nil
 }

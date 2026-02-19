@@ -2,6 +2,7 @@ package handler
 
 import (
 	dto "be-knowledge/internal/delivery/dto/home"
+	Tracelog "be-knowledge/internal/tracelog"
 	"be-knowledge/internal/usecases"
 	"net/http"
 
@@ -17,14 +18,14 @@ func NewHomeHandler(homeService usecases.HomeService) *HomeHandler {
 }
 
 func (h *HomeHandler) GetHistoryChat(c *gin.Context) {
-	// namaEndpoint := "GetTopicById"
-	// Tracelog.TopicLog("Mulai proses GetTopicById", namaEndpoint)
+	namaEndpoint := "GetHistoryChat"
+	Tracelog.HomeLog("Mulai proses GetHistoryChat", namaEndpoint)
 
 	var req dto.Home_GetHistoryChat_Request
 
 	// Bind query param ke struct
 	if err := c.ShouldBindQuery(&req); err != nil {
-		//Tracelog.TopicLog("Request tidak valid: "+err.Error(), namaEndpoint)
+		Tracelog.HomeLog("Request tidak valid: "+err.Error(), namaEndpoint)
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -32,12 +33,12 @@ func (h *HomeHandler) GetHistoryChat(c *gin.Context) {
 	// Panggil service dengan ID yang sudah tervalidasi
 	topic, err := h.homeService.GetHistoryChat(req)
 	if err != nil {
-		//Tracelog.TopicLog("GetTopicById gagal: "+err.Error(), namaEndpoint)
+		Tracelog.HomeLog("GetHistoryChat gagal: "+err.Error(), namaEndpoint)
 		c.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 		return
 	}
 
-	//Tracelog.TopicLog("GetTopicById berhasil", namaEndpoint)
+	Tracelog.HomeLog("GetHistoryChat berhasil", namaEndpoint)
 	c.JSON(http.StatusOK, gin.H{
 		"message": "Success",
 		"data":    topic,
