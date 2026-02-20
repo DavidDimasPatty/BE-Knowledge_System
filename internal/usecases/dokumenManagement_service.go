@@ -2,14 +2,15 @@ package usecases
 
 import (
 	dto "be-knowledge/internal/delivery/dto/dokumenManagement"
+	"be-knowledge/internal/entities"
+	"be-knowledge/internal/repository"
+	Tracelog "be-knowledge/internal/tracelog"
 	"errors"
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"time"
-
-	"be-knowledge/internal/entities"
-	"be-knowledge/internal/repository"
 )
 
 type DokumenManagementService interface {
@@ -39,16 +40,19 @@ func (s *dokumenManagementService) GetAllDokumen() (data *dto.DokumenManagement_
 }
 
 func (s *dokumenManagementService) AddDokumen(data *dto.DokumenManagement_AddDokumen_Request) error {
+	namaEndpoint := "AddDokumen"
 	parentPath := os.Getenv("STORAGE_PATH")
 	if parentPath == "" {
 		return errors.New("STORAGE_PATH is not set")
 	}
 	now := time.Now().Format("20060102_150405")
 	filePath := filepath.Join(parentPath, now+"_"+data.FileName)
+	Tracelog.DokumenManagementLog(fmt.Sprintf("Mulai Simpan Dokumen pada : %v", filePath), namaEndpoint)
 	if err := ioutil.WriteFile(filePath, data.FileData, 0644); err != nil {
+		Tracelog.DokumenManagementLog(fmt.Sprintf("Error Simpan Dokumen pada : %v, Error : %v", filePath, err.Error()), namaEndpoint)
 		return err
 	}
-
+	Tracelog.DokumenManagementLog(fmt.Sprintf("Berhasil Simpan Dokumen pada : %v", filePath), namaEndpoint)
 	return s.repo.AddDokumen(data, filePath)
 }
 
@@ -66,6 +70,7 @@ func (s *dokumenManagementService) EditDokumen(data *dto.DokumenManagement_EditD
 		parentPath string
 		filePath   *string
 	)
+	namaEndpoint := "EditDokumen"
 	if data.FileData != nil {
 		parentPath = os.Getenv("STORAGE_PATH")
 		if parentPath == "" {
@@ -73,11 +78,12 @@ func (s *dokumenManagementService) EditDokumen(data *dto.DokumenManagement_EditD
 		}
 		now := time.Now().Format("20060102_150405")
 		fullPath := filepath.Join(parentPath, now+"_"+data.FileName)
-
+		Tracelog.DokumenManagementLog(fmt.Sprintf("Mulai Simpan Dokumen pada : %v", filePath), namaEndpoint)
 		if err := ioutil.WriteFile(fullPath, data.FileData, 0644); err != nil {
+			Tracelog.DokumenManagementLog(fmt.Sprintf("Error Simpan Dokumen pada : %v, Error : %v", filePath, err.Error()), namaEndpoint)
 			return err
 		}
-
+		Tracelog.DokumenManagementLog(fmt.Sprintf("Berhasil Simpan Dokumen pada : %v", filePath), namaEndpoint)
 		filePath = &(fullPath)
 	}
 

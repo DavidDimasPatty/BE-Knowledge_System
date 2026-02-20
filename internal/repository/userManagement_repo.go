@@ -3,6 +3,7 @@ package repository
 import (
 	dto "be-knowledge/internal/delivery/dto/userManagement"
 	"be-knowledge/internal/entities"
+	Tracelog "be-knowledge/internal/tracelog"
 	"crypto/rand"
 	"errors"
 	"fmt"
@@ -33,6 +34,7 @@ func NewUserManagementRepository(db *sqlx.DB) UserManagementRepository {
 }
 
 func (r *userManagementRepository) GetAllUser() (*dto.UserManagement_GetAllUser_Response, error) {
+	namaEndpoint := "GetAllUser"
 	res := dto.UserManagement_GetAllUser_Response{}
 
 	users := []entities.User{}
@@ -40,7 +42,16 @@ func (r *userManagementRepository) GetAllUser() (*dto.UserManagement_GetAllUser_
 	query := "SELECT u.*, r.nama AS `role_name` FROM users u LEFT JOIN roles r ON r.id = u.roles;"
 
 	err := r.db.Select(&users, query)
+
+	Tracelog.UserManagementLog(
+		fmt.Sprintf("SQL: %s ", query),
+		namaEndpoint,
+	)
 	if err != nil {
+		Tracelog.UserManagementLog(
+			fmt.Sprintf("Error : %v", err.Error()),
+			namaEndpoint,
+		)
 		return nil, err
 	}
 
@@ -50,15 +61,28 @@ func (r *userManagementRepository) GetAllUser() (*dto.UserManagement_GetAllUser_
 }
 
 func (r *userManagementRepository) AddUser(data dto.UserManagement_AddUser_Request) error {
+	namaEndpoint := "AddUser"
 	var checkUser int
 	querySelect := "SELECT count(*) FROM users WHERE username = ? or email = ?"
 
+	Tracelog.UserManagementLog(
+		fmt.Sprintf("SQL: %s | Params: username=%v, email=%v", querySelect, data.Username, data.Email),
+		namaEndpoint,
+	)
 	errSelect := r.db.Get(&checkUser, querySelect, data.Username, data.Email)
 	if errSelect != nil {
+		Tracelog.UserManagementLog(
+			fmt.Sprintf("Error : %v", errSelect.Error()),
+			namaEndpoint,
+		)
 		return errSelect
 	}
 
 	if checkUser > 0 {
+		Tracelog.UserManagementLog(
+			"Error : user already exist",
+			namaEndpoint,
+		)
 		return errors.New("user already exist")
 	}
 
@@ -74,6 +98,11 @@ func (r *userManagementRepository) AddUser(data dto.UserManagement_AddUser_Reque
 
 	hashedPass, errHash := bcrypt.GenerateFromPassword([]byte(passwordStr), bcrypt.DefaultCost)
 	if errHash != nil {
+		Tracelog.UserManagementLog(
+			fmt.Sprintf("Error : %v", errHash.Error()),
+			namaEndpoint,
+		)
+
 		return errHash
 	}
 
@@ -92,17 +121,26 @@ func (r *userManagementRepository) AddUser(data dto.UserManagement_AddUser_Reque
 		data.AddId,
 	)
 
+	Tracelog.UserManagementLog(
+		fmt.Sprintf("SQL: %s | Params: username=%v, email=%v, nama=%v, roleId=%v, addId=%v",
+			err, data.Username, data.Email, data.Nama, data.RoleId, data.AddId),
+		namaEndpoint)
+
 	go sendEmail(data.Email, data.Username, passwordStr)
 
 	return err
 }
 
 func (r *userManagementRepository) EditUserGet(id int) (*entities.User, error) {
+	namaEndpoint := "EditUserGet"
 	user := entities.User{}
 	query := "SELECT * FROM users WHERE id = ?"
 
 	err := r.db.Get(&user, query, id)
 	if err != nil {
+		Tracelog.UserManagementLog(
+			fmt.Sprintf("SQL: %s | Params: id=%v", query, id),
+			namaEndpoint)
 		return nil, err
 	}
 
@@ -110,15 +148,27 @@ func (r *userManagementRepository) EditUserGet(id int) (*entities.User, error) {
 }
 
 func (r *userManagementRepository) EditUser(data dto.UserManagement_EditUser_Request) error {
+	namaEndpoint := "EditUser"
 	var checkUser int
 	querySelect := "SELECT count(*) FROM users WHERE ( email = ? ) and  id != ?"
+	Tracelog.UserManagementLog(
+		fmt.Sprintf("SQL: %s | Params: email=%v, id=%v", querySelect, data.Email, data.Id),
+		namaEndpoint)
 
 	errSelect := r.db.Get(&checkUser, querySelect, data.Email, data.Id)
 	if errSelect != nil {
+		Tracelog.UserManagementLog(
+			fmt.Sprintf("Error : %v", errSelect.Error()),
+			namaEndpoint,
+		)
 		return errSelect
 	}
 
 	if checkUser > 0 {
+		Tracelog.UserManagementLog(
+			"Error : user already exist",
+			namaEndpoint,
+		)
 		return errors.New("user already exist")
 	}
 
@@ -127,6 +177,10 @@ func (r *userManagementRepository) EditUser(data dto.UserManagement_EditUser_Req
 		SET   email = ?, nama = ?, roles = ?, updId = ?, updTime = NOW()
 		WHERE id = ?
 	`
+	Tracelog.UserManagementLog(
+		fmt.Sprintf("SQL: %s | Params: email=%v, nama=%v, roles=%v, updId=%v, id=%v",
+			query, data.Email, data.Nama, data.RoleId, data.UpdId, data.Id),
+		namaEndpoint)
 
 	_, err := r.db.Exec(query,
 		data.Email,
@@ -140,23 +194,39 @@ func (r *userManagementRepository) EditUser(data dto.UserManagement_EditUser_Req
 }
 
 func (r *userManagementRepository) DeleteUser(id int) error {
+	namaEndpoint := "DeleteUser"
 	query := "DELETE FROM users WHERE id = ?"
-
+	Tracelog.UserManagementLog(
+		fmt.Sprintf("SQL: %s | Params: id=%v", query, id),
+		namaEndpoint)
 	_, err := r.db.Exec(query, id)
 	return err
 }
 
 func (r *userManagementRepository) ChangeStatusUser(data dto.UserManagement_ChangeStatusUser_Request) error {
-
+	namaEndpoint := "ChangeStatusUser"
 	var checkUser int
 	querySelect := "SELECT count(*) FROM users WHERE  id = ?"
 
 	errSelect := r.db.Get(&checkUser, querySelect, data.Id)
+
+	Tracelog.UserManagementLog(
+		fmt.Sprintf("SQL: %s | Params: id=%v", querySelect, data.Id),
+		namaEndpoint)
+
 	if errSelect != nil {
+		Tracelog.UserManagementLog(
+			fmt.Sprintf("Error : %v", errSelect.Error()),
+			namaEndpoint,
+		)
 		return errSelect
 	}
 
 	if checkUser == 0 {
+		Tracelog.UserManagementLog(
+			"Error : user not found",
+			namaEndpoint,
+		)
 		return errors.New("user not found")
 	}
 
@@ -168,6 +238,9 @@ func (r *userManagementRepository) ChangeStatusUser(data dto.UserManagement_Chan
 	} else {
 		statusFinal = "Active"
 	}
+	Tracelog.UserManagementLog(
+		fmt.Sprintf("SQL: %s | Params: status=%v, id=%v", querySelect, data.Id, statusFinal),
+		namaEndpoint)
 	_, err := r.db.Exec(query, statusFinal, data.Id)
 	return err
 }
