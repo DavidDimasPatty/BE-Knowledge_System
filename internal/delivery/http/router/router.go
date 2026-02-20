@@ -2,6 +2,7 @@ package router
 
 import (
 	"be-knowledge/internal/delivery/http/handler"
+	"os"
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -17,12 +18,12 @@ func SetupRouter(authHandler *handler.AuthHandler,
 	homeHandler *handler.HomeHandler,
 ) *gin.Engine {
 	r := gin.Default()
-
+	reactFE := os.Getenv("URL_REACT")
 	r.Use(cors.New(cors.Config{
-		AllowOrigins:     []string{"http://localhost:3000"},
+		AllowOrigins:     []string{reactFE},
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
 		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
-		ExposeHeaders:    []string{"Content-Length"},
+		ExposeHeaders:    []string{"*"},
 		AllowCredentials: true,
 		MaxAge:           12 * time.Hour,
 	}))

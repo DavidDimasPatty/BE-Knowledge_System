@@ -126,7 +126,7 @@ func (h *WebSocketHandler) handleStream(
 	req, err := http.NewRequestWithContext(
 		ctx,
 		"POST",
-		urlPython,
+		urlPython+"/ask3/stream",
 		bytes.NewBuffer(body),
 	)
 	if err != nil {
